@@ -2,4 +2,11 @@ const Setting = {
   CardsCount: 5
 };
 
-export {Setting};
+const AppRoute = {
+  Root: '/',
+  Favorites: '/favorites',
+  Login: '/login',
+  Offer: '/offer/'
+} as const;
+
+export {Setting, AppRoute};
