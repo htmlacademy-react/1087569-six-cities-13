@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import {Helmet} from 'react-helmet-async';
+import { AppRoute } from '../../const';
 
 function NotFoundScreen(): JSX.Element {
   return(
@@ -8,7 +9,7 @@ function NotFoundScreen(): JSX.Element {
         <title>Страница не найдена</title>
       </Helmet>
       <h1>404 Not Found</h1>
-      <Link to="/">На главную</Link>
+      <Link to={AppRoute.Root}>На главную</Link>
     </>
   );
 }
