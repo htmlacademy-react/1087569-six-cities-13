@@ -6,7 +6,7 @@ type PrivateRouteProps = {
   children: JSX.Element;
 }
 
-function PrivateRoot({authorizationStatus, children}: PrivateRouteProps): JSX.Element {
+function PrivateRoute({authorizationStatus, children}: PrivateRouteProps): JSX.Element {
   return(
     authorizationStatus === AuthorizationStatus.Auth
       ? children
@@ -14,4 +14,4 @@ function PrivateRoot({authorizationStatus, children}: PrivateRouteProps): JSX.El
   );
 }
 
-export default PrivateRoot;
+export default PrivateRoute;
