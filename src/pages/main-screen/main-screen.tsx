@@ -1,4 +1,5 @@
 import MainCard from '../../components/main-card';
+import {Helmet} from 'react-helmet-async';
 
 type MainPageProps = {
   cardsCount: number;
@@ -37,6 +38,9 @@ function MainScreen({cardsCount}: MainPageProps): JSX.Element {
       </header>
 
       <main className="page__main page__main--index">
+        <Helmet>
+          <title>6 городов</title>
+        </Helmet>
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">

@@ -1,3 +1,5 @@
+import {Helmet} from 'react-helmet-async';
+
 function OfferScreen(): JSX.Element {
   return(
     <div className="page">
@@ -31,6 +33,9 @@ function OfferScreen(): JSX.Element {
       </header>
 
       <main className="page__main page__main--offer">
+        <Helmet>
+          <title>Страница товара</title>
+        </Helmet>
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
