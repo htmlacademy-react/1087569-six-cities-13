@@ -72,7 +72,7 @@ const offers: Offer[] = [
   },
   {
     id: 'f6e517e8-d266-48f0-9f61-8d2f2b3e6be6',
-    title: 'Amazing and Extremely Central Flat',
+    title: 'Canal View Prinsengracht',
     type: 'hotel',
     price: 116,
     previewImage: 'https://13.design.pages.academy/static/hotel/10.jpg',

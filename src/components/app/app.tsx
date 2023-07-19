@@ -10,18 +10,21 @@ import {AppRoute, AuthorizationStatus} from '../../const';
 import {Offer} from '../../types/offer';
 
 type AppScreenProps = {
-  cardsCount: number;
   offers: Offer[];
 }
 
-function App({cardsCount, offers}: AppScreenProps): JSX.Element {
+function App({offers}: AppScreenProps): JSX.Element {
   return(
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route
             path={AppRoute.Root}
-            element={<MainScreen cardsCount={cardsCount} />}
+            element={
+              <MainScreen
+                offers={offers}
+              />
+            }
           />
           <Route
             path={AppRoute.Login}

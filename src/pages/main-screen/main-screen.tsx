@@ -1,12 +1,13 @@
-import MainCard from '../../components/main-card';
 import Logo from '../../components/logo/logo';
+import {CardsList} from '../../components/cards-list/cards-list';
+import {Offer} from '../../types/offer';
 import {Helmet} from 'react-helmet-async';
 
 type MainPageProps = {
-  cardsCount: number;
+  offers: Offer[];
 }
 
-function MainScreen({cardsCount}: MainPageProps): JSX.Element {
+function MainScreen({offers}: MainPageProps): JSX.Element {
   return(
     <div className="page page--gray page--main">
       <header className="header">
@@ -95,9 +96,9 @@ function MainScreen({cardsCount}: MainPageProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {Array.from({length:cardsCount}, (_item, index) => index).map((i) => <MainCard key={i}/>)}
-              </div>
+              <CardsList
+                offers={offers}
+              />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
