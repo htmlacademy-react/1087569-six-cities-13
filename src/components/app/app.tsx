@@ -7,12 +7,14 @@ import OfferScreen from '../../pages/offer-screen/offer-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
 import {AppRoute, AuthorizationStatus} from '../../const';
+import {Offer} from '../../types/offer';
 
 type AppScreenProps = {
   cardsCount: number;
+  offers: Offer[];
 }
 
-function App({cardsCount}: AppScreenProps): JSX.Element {
+function App({cardsCount, offers}: AppScreenProps): JSX.Element {
   return(
     <HelmetProvider>
       <BrowserRouter>
