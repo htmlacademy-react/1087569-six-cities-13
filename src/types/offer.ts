@@ -22,5 +22,20 @@ type Offer = {
   rating: number;
 }
 
-export type {Offer};
+type Host = {
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
+}
+
+type OfferDetail = Offer & {
+  description: string;
+  bedrooms: number;
+  goods: string[];
+  host: Host;
+  images: string[];
+  maxAdults: number;
+}
+
+export type {Offer, OfferDetail};
 
