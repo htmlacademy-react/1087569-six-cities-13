@@ -2,12 +2,13 @@ import {Offer} from '../../types/offer';
 
 type MainCardProps = {
   offer: Offer;
+  onMouseEnterHandler: () => void;
 }
 
 function MainCard(props: MainCardProps): JSX.Element {
-  const {offer} = props;
+  const {offer, onMouseEnterHandler} = props;
   return (
-    <article className="cities__card place-card">
+    <article className="cities__card place-card" onMouseEnter={onMouseEnterHandler}>
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
           <img className="place-card__image" src={offer.previewImage} width="260" height="200" alt="Place image" />
