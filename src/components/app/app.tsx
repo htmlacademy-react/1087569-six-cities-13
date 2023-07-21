@@ -42,9 +42,10 @@ function App({offers, favoritesOffers, detailsOffers}: AppScreenProps): JSX.Elem
               </PrivateRoute>
             }
           />
-          <Route path={AppRoute.Offer} element={<OfferScreen detailsOffers={detailsOffers}/>}>
-            <Route path=':id' element={<OfferScreen detailsOffers={detailsOffers}/>}/>
-          </Route>
+          <Route
+            path={AppRoute.Offer}
+            element={<OfferScreen detailsOffers={detailsOffers}/>}
+          />
           <Route
             path='*'
             element={<NotFoundScreen />}
