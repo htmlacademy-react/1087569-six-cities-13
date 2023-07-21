@@ -7,14 +7,15 @@ import OfferScreen from '../../pages/offer-screen/offer-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
 import {AppRoute, AuthorizationStatus} from '../../const';
-import {Offer} from '../../types/offer';
+import {Offer, OfferDetail} from '../../types/offer';
 
 type AppScreenProps = {
   offers: Offer[];
   favoritesOffers: Offer[];
+  detailsOffers: OfferDetail[];
 }
 
-function App({offers, favoritesOffers}: AppScreenProps): JSX.Element {
+function App({offers, favoritesOffers, detailsOffers}: AppScreenProps): JSX.Element {
   return(
     <HelmetProvider>
       <BrowserRouter>
@@ -41,8 +42,8 @@ function App({offers, favoritesOffers}: AppScreenProps): JSX.Element {
               </PrivateRoute>
             }
           />
-          <Route path={AppRoute.Offer} element={<OfferScreen />}>
-            <Route path=':id' element={<OfferScreen />}/>
+          <Route path={AppRoute.Offer} element={<OfferScreen detailsOffers={detailsOffers}/>}>
+            <Route path=':id' element={<OfferScreen detailsOffers={detailsOffers}/>}/>
           </Route>
           <Route
             path='*'
