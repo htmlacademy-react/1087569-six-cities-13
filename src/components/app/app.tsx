@@ -11,9 +11,10 @@ import {Offer} from '../../types/offer';
 
 type AppScreenProps = {
   offers: Offer[];
+  favoritesOffers: Offer[];
 }
 
-function App({offers}: AppScreenProps): JSX.Element {
+function App({offers, favoritesOffers}: AppScreenProps): JSX.Element {
   return(
     <HelmetProvider>
       <BrowserRouter>
@@ -36,7 +37,7 @@ function App({offers}: AppScreenProps): JSX.Element {
               <PrivateRoute
                 authorizationStatus={AuthorizationStatus.NoAuth}
               >
-                <FavoritesScreen />
+                <FavoritesScreen favoritesOffers={favoritesOffers} />
               </PrivateRoute>
             }
           />
