@@ -1,12 +1,8 @@
-const Setting = {
-  CardsCount: 5
-};
-
 const AppRoute = {
   Root: '/',
   Favorites: '/favorites',
   Login: '/login',
-  Offer: '/offer/'
+  Offer: '/offer/:id'
 } as const;
 
 enum AuthorizationStatus {
@@ -15,4 +11,4 @@ enum AuthorizationStatus {
   Unknown = 'UNKNOWN'
 }
 
-export {Setting, AppRoute, AuthorizationStatus};
+export {AppRoute, AuthorizationStatus};

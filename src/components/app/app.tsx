@@ -6,20 +6,27 @@ import LoginScreen from '../../pages/login-screen/login-screen';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import {AppRoute, AuthorizationStatus} from '../../const';
+import {Offer, OfferDetail} from '../../types/offer';
 
 type AppScreenProps = {
-  cardsCount: number;
+  offers: Offer[];
+  favoritesOffers: Offer[];
+  detailsOffers: OfferDetail[];
 }
 
-function App({cardsCount}: AppScreenProps): JSX.Element {
+function App({offers, favoritesOffers, detailsOffers}: AppScreenProps): JSX.Element {
   return(
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route
             path={AppRoute.Root}
-            element={<MainScreen cardsCount={cardsCount} />}
+            element={
+              <MainScreen
+                offers={offers}
+              />
+            }
           />
           <Route
             path={AppRoute.Login}
@@ -31,13 +38,14 @@ function App({cardsCount}: AppScreenProps): JSX.Element {
               <PrivateRoute
                 authorizationStatus={AuthorizationStatus.NoAuth}
               >
-                <FavoritesScreen />
+                <FavoritesScreen favoritesOffers={favoritesOffers} />
               </PrivateRoute>
             }
           />
-          <Route path={AppRoute.Offer} element={<OfferScreen />}>
-            <Route path=':id' element={<OfferScreen />}/>
-          </Route>
+          <Route
+            path={AppRoute.Offer}
+            element={<OfferScreen detailsOffers={detailsOffers}/>}
+          />
           <Route
             path='*'
             element={<NotFoundScreen />}

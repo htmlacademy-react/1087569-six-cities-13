@@ -1,15 +1,25 @@
-function MainCard(): JSX.Element {
+import {Offer} from '../../types/offer';
+import {Link, generatePath} from 'react-router-dom';
+import {AppRoute} from '../../const';
+
+type MainCardProps = {
+  offer: Offer;
+  onMouseEnterHandler: () => void;
+}
+
+function MainCard(props: MainCardProps): JSX.Element {
+  const {offer, onMouseEnterHandler} = props;
   return (
-    <article className="cities__card place-card">
+    <article className="cities__card place-card" onMouseEnter={onMouseEnterHandler}>
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
-          <img className="place-card__image" src="img/room.jpg" width="260" height="200" alt="Place image" />
-        </a>
+        <Link to={generatePath(AppRoute.Offer, {id: offer.id})}>
+          <img className="place-card__image" src={offer.previewImage} width="260" height="200" alt="Place image" />
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">&euro;80</b>
+            <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
@@ -26,9 +36,9 @@ function MainCard(): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">Wood and stone place</a>
+          <Link to={generatePath(AppRoute.Offer, {id: offer.id})}>{offer.title}</Link>
         </h2>
-        <p className="place-card__type">Private room</p>
+        <p className="place-card__type">{offer.type}</p>
       </div>
     </article>
   );
