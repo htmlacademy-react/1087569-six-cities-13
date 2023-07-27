@@ -1,18 +1,22 @@
 import {Offer} from '../../types/offer';
 import MainCard from '../main-card/main-card';
-import {useState} from 'react';
+import {MouseEvent} from 'react';
 
 type CardsListProps = {
   offers: Offer[];
+  onCardMouseEnter: (id: string | undefined) => void;
 }
 
-function CardsList({offers}: CardsListProps): JSX.Element {
-  const [/*activeCard*/, setActiveCard] = useState(offers[0].id);
+function CardsList({offers, onCardMouseEnter}: CardsListProps): JSX.Element {
+  const handleMouseEnterItem = (event: MouseEvent<HTMLLIElement>) => {
+    event.preventDefault();
+    onCardMouseEnter(event.currentTarget.dataset.id);
+  };
 
   return (
     <div className="cities__places-list places__list tabs__content">
       {offers.map((offer) =>
-        <MainCard key={offer.id} offer={offer} onMouseEnterHandler={() => setActiveCard(offer.id)} />)}
+        <MainCard key={offer.id} offer={offer} onMouseEnterHandler={handleMouseEnterItem} />)}
     </div>
   );
 }

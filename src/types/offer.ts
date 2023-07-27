@@ -37,5 +37,5 @@ type OfferDetail = Offer & {
   maxAdults: number;
 }
 
-export type {Offer, OfferDetail};
+export type {Offer, OfferDetail, City};
 
