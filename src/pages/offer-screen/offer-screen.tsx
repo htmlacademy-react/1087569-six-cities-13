@@ -3,13 +3,16 @@ import Header from '../../components/header/header';
 import OfferCard from '../../components/offer-card/offer-card';
 import {OfferDetail} from '../../types/offer';
 import {useParams} from 'react-router-dom';
+import { Comment } from '../../types/comment';
 
 type OfferScreenProps = {
   detailsOffers: OfferDetail[];
+  comments: Comment[];
 }
 
-function OfferScreen({detailsOffers}: OfferScreenProps): JSX.Element {
+function OfferScreen({detailsOffers, comments}: OfferScreenProps): JSX.Element {
   const{id} = useParams();
+  const commentsForOffer = comments.filter((comment) => comment.id === id);
   const offer = detailsOffers.find((detailOffer) => detailOffer.id === id) as OfferDetail;
 
   return(
@@ -20,7 +23,7 @@ function OfferScreen({detailsOffers}: OfferScreenProps): JSX.Element {
         <Helmet>
           <title>Страница товара</title>
         </Helmet>
-        <OfferCard offer={offer}/>
+        <OfferCard offer={offer} comments={commentsForOffer} />
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>

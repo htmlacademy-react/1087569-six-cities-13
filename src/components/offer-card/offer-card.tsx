@@ -2,14 +2,17 @@ import { OfferDetail } from '../../types/offer';
 import OfferGalleryList from '../offer-gallery-list/offer-gallery-list';
 import GoodsList from '../goods-list/goods-list';
 import CommentForm from '../form-comment/comment-form';
+import CommentsList from '../comments-list/comments-list';
+import {Comment} from '../../types/comment';
 
 type OfferCardProps = {
   offer: OfferDetail;
+  comments: Comment[];
 }
 
-function OfferCard({ offer }: OfferCardProps): JSX.Element {
-  const { images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description } = offer;
-  const { name, avatarUrl, isPro } = host;
+function OfferCard({offer, comments}: OfferCardProps): JSX.Element {
+  const {images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description} = offer;
+  const {name, avatarUrl, isPro} = host;
 
   return (
     <section className="offer">
@@ -33,7 +36,7 @@ function OfferCard({ offer }: OfferCardProps): JSX.Element {
           </div>
           <div className="offer__rating rating">
             <div className="offer__stars rating__stars">
-              <span style={{ width: '80%' }}></span>
+              <span style={{ width: `${rating * 20}%` }}></span>
               <span className="visually-hidden">Rating</span>
             </div>
             <span className="offer__rating-value rating__value">{rating}</span>
@@ -78,31 +81,8 @@ function OfferCard({ offer }: OfferCardProps): JSX.Element {
             </div>
           </div>
           <section className="offer__reviews reviews">
-            <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-            <ul className="reviews__list">
-              <li className="reviews__item">
-                <div className="reviews__user user">
-                  <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                    <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar" />
-                  </div>
-                  <span className="reviews__user-name">
-                    Max
-                  </span>
-                </div>
-                <div className="reviews__info">
-                  <div className="reviews__rating rating">
-                    <div className="reviews__stars rating__stars">
-                      <span style={{ width: '80%' }}></span>
-                      <span className="visually-hidden">Rating</span>
-                    </div>
-                  </div>
-                  <p className="reviews__text">
-                    A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-                  </p>
-                  <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
-                </div>
-              </li>
-            </ul>
+            <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
+            <CommentsList comments={comments} />
             <CommentForm />
           </section>
         </div>
