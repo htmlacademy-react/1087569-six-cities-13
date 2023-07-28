@@ -2,12 +2,21 @@ import Header from '../../components/header/header';
 import {CardsList} from '../../components/cards-list/cards-list';
 import {Offer} from '../../types/offer';
 import {Helmet} from 'react-helmet-async';
+import Map from '../../components/map/map';
+import {useState} from 'react';
 
 type MainPageProps = {
   offers: Offer[];
 }
 
 function MainScreen({offers}: MainPageProps): JSX.Element {
+  const [activeCard, setActiveCard] = useState<Offer | undefined>(undefined);
+  const handleMouseEnterItem = (id: string | undefined) => {
+    const currentCard = offers.find((offer) => offer.id === id);
+
+    setActiveCard(currentCard);
+  };
+
   return(
     <div className="page page--gray page--main">
       <Header />
@@ -75,10 +84,14 @@ function MainScreen({offers}: MainPageProps): JSX.Element {
               </form>
               <CardsList
                 offers={offers}
+                onCardMouseEnter={handleMouseEnterItem}
               />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <Map
+                offers={offers}
+                activeCard={activeCard}
+              />
             </div>
           </div>
         </div>

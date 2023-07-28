@@ -8,16 +8,16 @@ const offers: Offer[] = [
     price: 402,
     previewImage: 'https://13.design.pages.academy/static/hotel/7.jpg',
     city: {
-      name: 'Paris',
+      name: 'Amsterdam',
       location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
-        zoom: 13
+        latitude: 52.377956,
+        longitude: 4.897070,
+        zoom: 12
       }
     },
     location: {
-      latitude: 48.868610000000004,
-      longitude: 2.342499,
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
       zoom: 16
     },
     isFavorite: true,
@@ -31,16 +31,16 @@ const offers: Offer[] = [
     price: 368,
     previewImage: 'https://13.design.pages.academy/static/hotel/12.jpg',
     city: {
-      name: 'Paris',
+      name: 'Amsterdam',
       location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
-        zoom: 13
+        latitude: 52.377956,
+        longitude: 4.897070,
+        zoom: 12
       }
     },
     location: {
-      latitude: 48.858610000000006,
-      longitude: 2.330499,
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198,
       zoom: 16
     },
     isFavorite: false,
@@ -54,16 +54,16 @@ const offers: Offer[] = [
     price: 258,
     previewImage: 'https://13.design.pages.academy/static/hotel/11.jpg',
     city: {
-      name: 'Paris',
+      name: 'Amsterdam',
       location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
-        zoom: 13
+        latitude: 52.377956,
+        longitude: 4.897070,
+        zoom: 12
       }
     },
     location: {
-      latitude: 48.834610000000005,
-      longitude: 2.335499,
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
       zoom: 16
     },
     isFavorite: false,
@@ -77,16 +77,16 @@ const offers: Offer[] = [
     price: 116,
     previewImage: 'https://13.design.pages.academy/static/hotel/10.jpg',
     city: {
-      name: 'Paris',
+      name: 'Amsterdam',
       location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
-        zoom: 13
+        latitude: 52.377956,
+        longitude: 4.897070,
+        zoom: 12
       }
     },
     location: {
-      latitude: 48.85761,
-      longitude: 2.358499,
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
       zoom: 16
     },
     isFavorite: true,
@@ -103,16 +103,16 @@ const favoritesOffers: Offer[] = [
     price: 402,
     previewImage: 'https://13.design.pages.academy/static/hotel/7.jpg',
     city: {
-      name: 'Paris',
+      name: 'Amsterdam',
       location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
-        zoom: 13
+        latitude: 52.377956,
+        longitude: 4.897070,
+        zoom: 12
       }
     },
     location: {
-      latitude: 48.868610000000004,
-      longitude: 2.342499,
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
       zoom: 16
     },
     isFavorite: true,
@@ -126,16 +126,16 @@ const favoritesOffers: Offer[] = [
     price: 116,
     previewImage: 'https://13.design.pages.academy/static/hotel/10.jpg',
     city: {
-      name: 'Paris',
+      name: 'Amsterdam',
       location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
-        zoom: 13
+        latitude: 52.377956,
+        longitude: 4.897070,
+        zoom: 12
       }
     },
     location: {
-      latitude: 48.85761,
-      longitude: 2.358499,
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
       zoom: 16
     },
     isFavorite: true,
@@ -152,22 +152,22 @@ const detailsOffers: OfferDetail[] = [
     price: 402,
     previewImage: 'https://13.design.pages.academy/static/hotel/7.jpg',
     city: {
-      name: 'Paris',
+      name: 'Amsterdam',
       location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
-        zoom: 13
+        latitude: 52.377956,
+        longitude: 4.897070,
+        zoom: 12
       }
     },
     location: {
-      latitude: 48.868610000000004,
-      longitude: 2.342499,
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
       zoom: 16
     },
     isFavorite: true,
     isPremium: true,
     rating: 1.8,
-    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Paris',
+    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam',
     bedrooms: 2,
     goods: [
       'Heating'
@@ -192,22 +192,22 @@ const detailsOffers: OfferDetail[] = [
     price: 368,
     previewImage: 'https://13.design.pages.academy/static/hotel/12.jpg',
     city: {
-      name: 'Paris',
+      name: 'Amsterdam',
       location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
-        zoom: 13
+        latitude: 52.377956,
+        longitude: 4.897070,
+        zoom: 12
       }
     },
     location: {
-      latitude: 48.858610000000006,
-      longitude: 2.330499,
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198,
       zoom: 16
     },
     isFavorite: false,
     isPremium: true,
     rating: 4.2,
-    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Paris',
+    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam',
     bedrooms: 1,
     goods: [
       'Baby seat',
@@ -235,22 +235,22 @@ const detailsOffers: OfferDetail[] = [
     price: 258,
     previewImage: 'https://13.design.pages.academy/static/hotel/11.jpg',
     city: {
-      name: 'Paris',
+      name: 'Amsterdam',
       location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
-        zoom: 13
+        latitude: 52.377956,
+        longitude: 4.897070,
+        zoom: 12
       }
     },
     location: {
-      latitude: 48.834610000000005,
-      longitude: 2.335499,
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
       zoom: 16
     },
     isFavorite: false,
     isPremium: false,
     rating: 4.2,
-    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Paris',
+    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam',
     bedrooms: 1,
     goods: [
       'Baby seat',
@@ -279,22 +279,22 @@ const detailsOffers: OfferDetail[] = [
     price: 116,
     previewImage: 'https://13.design.pages.academy/static/hotel/10.jpg',
     city: {
-      name: 'Paris',
+      name: 'Amsterdam',
       location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
-        zoom: 13
+        latitude: 52.377956,
+        longitude: 4.897070,
+        zoom: 12
       }
     },
     location: {
-      latitude: 48.85761,
-      longitude: 2.358499,
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
       zoom: 16
     },
     isFavorite: true,
     isPremium: false,
     rating: 1.5,
-    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Paris',
+    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam',
     bedrooms: 1,
     goods: [
       'Baby seat',
