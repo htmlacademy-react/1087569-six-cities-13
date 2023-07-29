@@ -1,16 +1,19 @@
-import { OfferDetail } from '../../types/offer';
+import {OfferDetail, Offer} from '../../types/offer';
 import OfferGalleryList from '../offer-gallery-list/offer-gallery-list';
 import GoodsList from '../goods-list/goods-list';
 import CommentForm from '../form-comment/comment-form';
 import CommentsList from '../comments-list/comments-list';
 import {Comment} from '../../types/comment';
+import Map from '../map/map';
 
 type OfferCardProps = {
   offer: OfferDetail;
+  nearOffers: Offer[];
+  activeCard: Offer | undefined;
   comments: Comment[];
 }
 
-function OfferCard({offer, comments}: OfferCardProps): JSX.Element {
+function OfferCard({offer, nearOffers, activeCard, comments}: OfferCardProps): JSX.Element {
   const {images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description} = offer;
   const {name, avatarUrl, isPro} = host;
 
@@ -87,7 +90,7 @@ function OfferCard({offer, comments}: OfferCardProps): JSX.Element {
           </section>
         </div>
       </div>
-      <section className="offer__map map"></section>
+      <Map offers={nearOffers} activeCard={activeCard} isMainPage={false} />
     </section>
   );
 }
