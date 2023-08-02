@@ -5,7 +5,7 @@ import cn from 'classnames';
 
 type CardsListProps = {
   offers: Offer[];
-  isNear: boolean;
+  isNear?: boolean;
   onCardMouseEnter: (id: string | undefined) => void;
 }
 
