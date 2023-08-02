@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import {offers, favoritesOffers, detailsOffers} from './mocks/offers';
+import {offers, favoritesOffers, detailsOffers, nearOffers} from './mocks/offers';
+import {comments} from './mocks/comments';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -13,6 +14,8 @@ root.render(
       offers={offers}
       favoritesOffers={favoritesOffers}
       detailsOffers={detailsOffers}
+      nearOffers={nearOffers}
+      comments={comments}
     />
   </React.StrictMode>
 );

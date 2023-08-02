@@ -84,6 +84,7 @@ function MainScreen({offers}: MainPageProps): JSX.Element {
               </form>
               <CardsList
                 offers={offers}
+                isNear={false}
                 onCardMouseEnter={handleMouseEnterItem}
               />
             </section>
@@ -91,6 +92,7 @@ function MainScreen({offers}: MainPageProps): JSX.Element {
               <Map
                 offers={offers}
                 activeCard={activeCard}
+                isMainPage
               />
             </div>
           </div>

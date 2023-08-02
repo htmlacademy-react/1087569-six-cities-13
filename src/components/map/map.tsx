@@ -4,10 +4,12 @@ import {useRef, useEffect} from 'react';
 import {Icon, Marker, layerGroup} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/use-map';
+import cn from 'classnames';
 
 type MapProps = {
   offers: Offer[];
   activeCard: Offer | undefined;
+  isMainPage: boolean;
 };
 
 const defaultCustomIcon = new Icon({
@@ -22,7 +24,7 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-function Map({offers, activeCard}: MapProps): JSX.Element {
+function Map({offers, activeCard, isMainPage}: MapProps): JSX.Element {
   const {city} = offers[0];
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
@@ -51,7 +53,22 @@ function Map({offers, activeCard}: MapProps): JSX.Element {
   }, [map, offers, activeCard]);
 
   return(
-    <section className="cities__map map" style={{height: '500px'}} ref={mapRef}></section>
+    <section
+      className={cn(
+        {'cities__map': isMainPage},
+        {'offer__map': !isMainPage},
+        'map'
+      )}
+      style={{
+        height: '100%',
+        minHeight: '500px',
+        width: '100%',
+        maxWidth: '1144px',
+        margin: '0 auto'
+      }}
+      ref={mapRef}
+    >
+    </section>
   );
 }
 
