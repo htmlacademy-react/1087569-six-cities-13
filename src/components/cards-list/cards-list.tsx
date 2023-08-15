@@ -5,7 +5,7 @@ import cn from 'classnames';
 
 type CardsListProps = {
   offers: Offer[];
-  isNear: boolean;
+  isNear?: boolean;
   onCardMouseEnter: (id: string | undefined) => void;
 }
 
@@ -25,7 +25,7 @@ function CardsList({offers, isNear, onCardMouseEnter}: CardsListProps): JSX.Elem
       )}
     >
       {offers.map((offer) =>
-        <MainCard key={offer.id} offer={offer} onMouseEnterHandler={handleMouseEnterItem} isNear={isNear} />)}
+        <MainCard key={offer.id} offer={offer} onMouseEnterHandler={handleMouseEnterItem} isNear />)}
     </div>
   );
 }

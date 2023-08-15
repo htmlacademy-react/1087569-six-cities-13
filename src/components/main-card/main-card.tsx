@@ -6,7 +6,7 @@ import cn from 'classnames';
 
 type MainCardProps = {
   offer: Offer;
-  isNear: boolean;
+  isNear?: boolean;
   onMouseEnterHandler: (event: MouseEvent<HTMLLIElement>) => void;
 }
 

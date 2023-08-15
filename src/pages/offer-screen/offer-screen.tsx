@@ -1,28 +1,35 @@
 import {Helmet} from 'react-helmet-async';
 import Header from '../../components/header/header';
 import OfferCard from '../../components/offer-card/offer-card';
-import {OfferDetail, Offer} from '../../types/offer';
+import {Offer} from '../../types/offer';
 import {useParams} from 'react-router-dom';
-import {Comment} from '../../types/comment';
 import {CardsList} from '../../components/cards-list/cards-list';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {dropOffer, fetchNearOffers, fetchOffer} from '../../store/actions';
 
-type OfferScreenProps = {
-  detailsOffers: OfferDetail[];
-  nearOffers: Offer[];
-  comments: Comment[];
-}
-
-function OfferScreen({detailsOffers, nearOffers, comments}: OfferScreenProps): JSX.Element {
+function OfferScreen(): JSX.Element {
   const{id} = useParams();
-  const commentsForOffer = comments.filter((comment) => comment.id === id);
-  const offer = detailsOffers.find((detailOffer) => detailOffer.id === id) as OfferDetail;
+  const dispatch = useAppDispatch();
+  const offer = useAppSelector((state) => state.offer);
   const [activeCard, setActiveCard] = useState<Offer | undefined>(undefined);
+  const nearOffers = useAppSelector((state) => state.nearOffers);
   const handleMouseEnterItem = (nearId: string | undefined) => {
     const currentCard = nearOffers.find((nearOffer) => nearOffer.id === nearId);
 
     setActiveCard(currentCard);
   };
+
+  useEffect(() => {
+    if(id) {
+      dispatch(fetchOffer(id));
+      dispatch(fetchNearOffers(id));
+    }
+
+    return () => {
+      dispatch(dropOffer());
+    };
+  }, [id, dispatch]);
 
   return(
     <div className="page">
@@ -32,7 +39,7 @@ function OfferScreen({detailsOffers, nearOffers, comments}: OfferScreenProps): J
         <Helmet>
           <title>Страница товара</title>
         </Helmet>
-        <OfferCard offer={offer} nearOffers={nearOffers} activeCard={activeCard} comments={commentsForOffer} />
+        {offer ? <OfferCard offer={offer} nearOffers={nearOffers} activeCard={activeCard} /> : ''}
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
