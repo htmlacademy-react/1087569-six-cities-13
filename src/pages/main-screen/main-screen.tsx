@@ -15,7 +15,7 @@ function MainScreen(): JSX.Element {
   const dispatch = useAppDispatch();
   const currentCity = useAppSelector((state) => state.activeCity);
   const offers = useAppSelector((state) => state.offers);
-  const OffersByCity = findOffersByCity(currentCity.name);
+  const offersByCity = findOffersByCity(currentCity.name);
 
   const handleMouseEnterItem = (id: string | undefined) => {
     const currentCard = offers.find((offer) => offer.id === id);
@@ -41,7 +41,7 @@ function MainScreen(): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{OffersByCity.length} places to stay in {currentCity.name}</b>
+              <b className="places__found">{offersByCity.length} places to stay in {currentCity.name}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -58,13 +58,13 @@ function MainScreen(): JSX.Element {
                 </ul>
               </form>
               <CardsList
-                offers={OffersByCity}
+                offers={offersByCity}
                 onCardMouseEnter={handleMouseEnterItem}
               />
             </section>
             <div className="cities__right-section">
               <Map
-                offers={OffersByCity}
+                offers={offersByCity}
                 activeCard={activeCard}
                 city={currentCity}
                 isMainPage
