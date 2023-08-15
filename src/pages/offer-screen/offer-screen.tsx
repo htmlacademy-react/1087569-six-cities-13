@@ -11,9 +11,6 @@ import {dropOffer, fetchNearOffers, fetchOffer} from '../../store/actions';
 function OfferScreen(): JSX.Element {
   const{id} = useParams();
   const dispatch = useAppDispatch();
-  /*if (id) {
-    dispatch(fetchOffer(id));
-  }*/
   const offer = useAppSelector((state) => state.offer);
   const [activeCard, setActiveCard] = useState<Offer | undefined>(undefined);
   const nearOffers = useAppSelector((state) => state.nearOffers);
@@ -42,7 +39,7 @@ function OfferScreen(): JSX.Element {
         <Helmet>
           <title>Страница товара</title>
         </Helmet>
-        <OfferCard offer={offer} nearOffers={nearOffers} activeCard={activeCard} />
+        {offer ? <OfferCard offer={offer} nearOffers={nearOffers} activeCard={activeCard} /> : ''}
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
