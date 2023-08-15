@@ -3,19 +3,27 @@ import OfferGalleryList from '../offer-gallery-list/offer-gallery-list';
 import GoodsList from '../goods-list/goods-list';
 import CommentForm from '../form-comment/comment-form';
 import CommentsList from '../comments-list/comments-list';
-import {Comment} from '../../types/comment';
 import Map from '../map/map';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {useEffect} from 'react';
+import {fetchComments} from '../../store/actions';
 
 type OfferCardProps = {
   offer: OfferDetail;
   nearOffers: Offer[];
   activeCard: Offer | undefined;
-  comments: Comment[];
 }
 
-function OfferCard({offer, nearOffers, activeCard, comments}: OfferCardProps): JSX.Element {
-  const {images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description} = offer;
+function OfferCard({offer, nearOffers, activeCard}: OfferCardProps): JSX.Element {
+  const {images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description, id} = offer;
   const {name, avatarUrl, isPro} = host;
+  const dispatch = useAppDispatch();
+  const currentCity = useAppSelector((state) => state.activeCity);
+  const comments = useAppSelector((state) => state.comments);
+
+  useEffect(() => {
+    dispatch(fetchComments(id));
+  }, [id, dispatch]);
 
   return (
     <section className="offer">
@@ -90,7 +98,7 @@ function OfferCard({offer, nearOffers, activeCard, comments}: OfferCardProps): J
           </section>
         </div>
       </div>
-      <Map offers={nearOffers} activeCard={activeCard} isMainPage={false} />
+      <Map offers={nearOffers} activeCard={activeCard} city={currentCity} isMainPage={false} />
     </section>
   );
 }

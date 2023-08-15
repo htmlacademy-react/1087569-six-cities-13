@@ -1,13 +1,10 @@
 import {Helmet} from 'react-helmet-async';
-import { Offer } from '../../types/offer';
 import Header from '../../components/header/header';
 import FavoritesCityList from '../../components/favorites-city-list/favorites-city-list';
+import {useAppSelector} from '../../hooks';
 
-type FavoritesPageProps = {
-  favoritesOffers: Offer[];
-}
-
-function FavoritesScreen({favoritesOffers}: FavoritesPageProps): JSX.Element {
+function FavoritesScreen(): JSX.Element {
+  const favoritesOffers = useAppSelector((state) => state.favorites);
   const cities = Array.from(new Set(favoritesOffers.map((offer) => offer.city.name)));
 
   return(

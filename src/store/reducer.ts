@@ -1,16 +1,16 @@
-import {createReducer} from '@reduxjs/toolkit/dist/createReducer';
-import {offers} from '../mocks/offers';
+import {createReducer} from '@reduxjs/toolkit';
+import {offers, detailsOffers} from '../mocks/offers';
 import {comments} from '../mocks/comments';
 import {Offer, OfferDetail, City} from '../types/offer';
 import {Comment} from '../types/comment';
-import {DEFAULT_CITY} from '../const';
+import {DEFAULT_CITY, CITIES} from '../const';
 import {fetchOffers, fetchOffer, fetchNearOffers, fetchComments, dropOffer, setActiveCity} from './actions';
 
 const initialState: {
   offers: Offer[];
   nearOffers: Offer[];
   comments: Comment[];
-  offer: OfferDetail | Offer | null; /*линтер ругается на OfferDetail*/
+  offer: OfferDetail | null;
   favorites: Offer[];
   activeCity: City;
 } = {
@@ -28,7 +28,7 @@ const reducer = createReducer(initialState, (builder) => {
       state.offers = offers;
     })
     .addCase(fetchOffer, (state, action) => {
-      state.offer = offers.find((offer) => offer.id === action.payload) ?? null;
+      state.offer = detailsOffers.find((offer) => offer.id === action.payload) ?? null;
     })
     .addCase(fetchNearOffers, (state, action) => {
       state.nearOffers = offers.filter((offer) => offer.id !== action.payload);
@@ -41,7 +41,7 @@ const reducer = createReducer(initialState, (builder) => {
       state.nearOffers = [];
     })
     .addCase(setActiveCity, (state, action) => {
-      state.activeCity = action.payload;
+      state.activeCity = CITIES.find((city) => city.name === action.payload) as City;
     });
 });
 

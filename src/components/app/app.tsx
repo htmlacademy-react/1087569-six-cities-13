@@ -7,18 +7,8 @@ import OfferScreen from '../../pages/offer-screen/offer-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
 import {AppRoute, AuthorizationStatus} from '../../const';
-import {Offer, OfferDetail} from '../../types/offer';
-import { Comment } from '../../types/comment';
 
-type AppScreenProps = {
-  offers: Offer[];
-  favoritesOffers: Offer[];
-  detailsOffers: OfferDetail[];
-  nearOffers: Offer[];
-  comments: Comment[];
-}
-
-function App({offers, favoritesOffers, detailsOffers, nearOffers, comments}: AppScreenProps): JSX.Element {
+function App(): JSX.Element {
   return(
     <HelmetProvider>
       <BrowserRouter>
@@ -26,9 +16,7 @@ function App({offers, favoritesOffers, detailsOffers, nearOffers, comments}: App
           <Route
             path={AppRoute.Root}
             element={
-              <MainScreen
-                offers={offers}
-              />
+              <MainScreen />
             }
           />
           <Route
@@ -41,13 +29,13 @@ function App({offers, favoritesOffers, detailsOffers, nearOffers, comments}: App
               <PrivateRoute
                 authorizationStatus={AuthorizationStatus.NoAuth}
               >
-                <FavoritesScreen favoritesOffers={favoritesOffers} />
+                <FavoritesScreen />
               </PrivateRoute>
             }
           />
           <Route
             path={AppRoute.Offer}
-            element={<OfferScreen detailsOffers={detailsOffers} nearOffers={nearOffers} comments={comments} />}
+            element={<OfferScreen />}
           />
           <Route
             path='*'
