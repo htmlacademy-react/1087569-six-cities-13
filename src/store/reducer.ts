@@ -1,8 +1,8 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {Offer, OfferDetail, City} from '../types/offer';
 import {Comment} from '../types/comment';
-import {DEFAULT_CITY, CITIES} from '../const';
-import {fetchOffers, /*fetchOffer, fetchNearOffers, fetchComments,*/ dropOffer, setActiveCity, setOffersDataLoadingStatus} from './actions';
+import {DEFAULT_CITY, CITIES, AuthorizationStatus} from '../const';
+import {fetchOffers, /*fetchOffer, fetchNearOffers, fetchComments,*/ dropOffer, setActiveCity, setOffersDataLoadingStatus, requireAuthorization} from './actions';
 
 const initialState: {
   offers: Offer[];
@@ -12,6 +12,7 @@ const initialState: {
   favorites: Offer[];
   activeCity: City;
   isOffersDataLoading: boolean;
+  authorizationStatus: AuthorizationStatus;
 } = {
   offers: [],
   nearOffers: [],
@@ -19,7 +20,8 @@ const initialState: {
   offer: null,
   favorites: [],
   activeCity: DEFAULT_CITY,
-  isOffersDataLoading: false
+  isOffersDataLoading: false,
+  authorizationStatus: AuthorizationStatus.Unknown
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -45,6 +47,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setOffersDataLoadingStatus, (state, action) => {
       state.isOffersDataLoading = action.payload;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
     });
 });
 
