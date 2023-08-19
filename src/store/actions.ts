@@ -20,6 +20,8 @@ const setActiveCity = createAction<string>(`${NameSpace.Offers}/setActiveCity`);
 
 const requireAuthorization = createAction<AuthorizationStatus>(`${NameSpace.User}/requireAuthorization`);
 
-export {fetchOffers, fetchOffer, fetchNearOffers, fetchComments, fetchFavorites, dropOffer, setActiveCity, setOffersDataLoadingStatus, requireAuthorization};
+const setError = createAction<string | null>('setError/fetch');
+
+export {fetchOffers, fetchOffer, fetchNearOffers, fetchComments, fetchFavorites, dropOffer, setActiveCity, setOffersDataLoadingStatus, requireAuthorization, setError};
 
 
