@@ -1,8 +1,7 @@
-import {offers} from './mocks/offers';
 import {Offer} from './types/offer';
 import {TSorting} from './types/sorting';
 
-const findOffersByCity = (cityName: string) => offers.filter((offer) => offer.city.name === cityName);
+const findOffersByCity = (offers: Offer[], cityName: string) => offers.filter((offer) => offer.city.name === cityName);
 
 const sortByRating = (offerA: Offer, offerB: Offer) => offerB.rating - offerA.rating;
 

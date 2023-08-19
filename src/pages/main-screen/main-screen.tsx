@@ -18,7 +18,7 @@ function MainScreen(): JSX.Element {
   const dispatch = useAppDispatch();
   const currentCity = useAppSelector((state) => state.activeCity);
   const offers = useAppSelector((state) => state.offers);
-  const offersByCity = sorting[currentSorting](findOffersByCity(currentCity.name));
+  const offersByCity = sorting[currentSorting](findOffersByCity(offers, currentCity.name));
 
   const handleMouseEnterItem = (id: string | undefined) => {
     const currentCard = offers.find((offer) => offer.id === id);

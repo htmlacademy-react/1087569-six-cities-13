@@ -88,4 +88,20 @@ const SortingMap = {
 const BACKEND_URL = 'https://13.design.pages.academy/six-cities';
 const REQUEST_TIMEOUT = 5000;
 
-export {AppRoute, AuthorizationStatus, NameSpace, URL_MARKER_DEFAULT, URL_MARKER_CURRENT, DEFAULT_CITY, CITIES, SortingMap, BACKEND_URL, REQUEST_TIMEOUT};
+const APIRoute = {
+  Offers: '/offers',
+  NearOffers: '/nearby',
+  Favorites: '/favorite',
+  Comments: '/comments',
+  Login: '/login',
+  Logout: '/logout'
+} as const;
+
+enum RequestStatus {
+  Idle,
+  Pending,
+  Success,
+  Error
+}
+
+export {AppRoute, AuthorizationStatus, NameSpace, URL_MARKER_DEFAULT, URL_MARKER_CURRENT, DEFAULT_CITY, CITIES, SortingMap, BACKEND_URL, REQUEST_TIMEOUT, APIRoute, RequestStatus};
