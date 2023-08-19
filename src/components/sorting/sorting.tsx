@@ -67,7 +67,7 @@ function Sorting({currentSorting, onChange}: SortingProps) {
           <li
             key={type}
             className={cn(
-              'places__options',
+              'places__option',
               {'places__option--active': currentSorting === type}
             )}
             tabIndex={0}

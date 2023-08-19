@@ -25,6 +25,10 @@ function MainScreen(): JSX.Element {
     setActiveCard(currentCard);
   };
 
+  const handleSortChange = (newSorting: TSorting) => {
+    setCurrentSorting(newSorting);
+  };
+
   useEffect(() => {
     dispatch(fetchOffers);
   }, [dispatch]);
@@ -46,7 +50,7 @@ function MainScreen(): JSX.Element {
               <b className="places__found">{offersByCity.length} places to stay in {currentCity.name}</b>
               <Sorting
                 currentSorting={currentSorting}
-                onChange={(newSorting) => setCurrentSorting(newSorting)}
+                onChange={handleSortChange}
               />
               <CardsList
                 offers={offersByCity}
