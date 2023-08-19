@@ -78,4 +78,11 @@ const CITIES: City[] = [
 
 const DEFAULT_CITY = CITIES[0];
 
-export {AppRoute, AuthorizationStatus, NameSpace, URL_MARKER_DEFAULT, URL_MARKER_CURRENT, DEFAULT_CITY, CITIES};
+const SortingMap = {
+  Popular: 'Popular',
+  LowToHigh: 'Price: low to high',
+  HighToLow: 'Price: high to low',
+  TopRated: 'Top rated first'
+} as const;
+
+export {AppRoute, AuthorizationStatus, NameSpace, URL_MARKER_DEFAULT, URL_MARKER_CURRENT, DEFAULT_CITY, CITIES, SortingMap};
