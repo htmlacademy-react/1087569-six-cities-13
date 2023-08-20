@@ -5,7 +5,7 @@ import {Comment} from '../types/comment';
 import {AxiosInstance} from 'axios';
 import {AppDispatch} from '../types/state';
 import {State} from '../types/state';
-import {fetchOffers, fetchOffer, fetchNearOffers, fetchComments, setOffersDataLoadingStatus, requireAuthorization, redirectToRoute} from './actions';
+import {fetchOffers, fetchOffer, fetchNearOffers, fetchComments, fetchFavorites, setOffersDataLoadingStatus, requireAuthorization, redirectToRoute} from './actions';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
 import {saveToken, dropToken} from '../services/token';
@@ -60,6 +60,18 @@ const fetchCommentsAction = createAsyncThunk<void, OfferDetail['id'], {
   }
 );
 
+const fetchOFavoritesAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  `${NameSpace.Favorites}/fetch`,
+  async (_arg, {dispatch, extra: api}) => {
+    const {data} = await api.get<Offer[]>(APIRoute.Favorites);
+    dispatch(fetchFavorites(data));
+  }
+);
+
 const checkAuthAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
@@ -103,4 +115,4 @@ const logoutAction = createAsyncThunk<void, undefined, {
   },
 );
 
-export {fetchOffersAction, fetchOfferAction, fetchNearOffersAction, fetchCommentsAction, checkAuthAction, loginAction, logoutAction};
+export {fetchOffersAction, fetchOfferAction, fetchNearOffersAction, fetchCommentsAction, fetchOFavoritesAction, checkAuthAction, loginAction, logoutAction};

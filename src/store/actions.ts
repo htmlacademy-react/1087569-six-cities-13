@@ -14,7 +14,7 @@ const setOffersDataLoadingStatus = createAction<boolean>('setOffersDataLoadingSt
 
 const fetchComments = createAction<Comment[]>(`${NameSpace.Comments}/fetch`);
 
-const fetchFavorites = createAction(`${NameSpace.Favorites}/fetch`);
+const fetchFavorites = createAction<Offer[]>(`${NameSpace.Favorites}/fetch`);
 
 const dropOffer = createAction(`${NameSpace.Offer}/drop`);
 

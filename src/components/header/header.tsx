@@ -6,6 +6,7 @@ import { AuthorizationStatus, AppRoute } from '../../const';
 
 function Header(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const favorites = useAppSelector((state) => state.favorites);
   const dispatch = useAppDispatch();
 
   return (
@@ -22,7 +23,7 @@ function Header(): JSX.Element {
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
                       <span className="header__user-name user__name">Dima6233@yandex.ru</span>
-                      <span className="header__favorite-count">3</span>
+                      <span className="header__favorite-count">{favorites.length}</span>
                     </Link>
                   </li>
                   <li className="header__nav-item">
