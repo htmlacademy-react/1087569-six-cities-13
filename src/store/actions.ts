@@ -1,17 +1,18 @@
 import {createAction} from '@reduxjs/toolkit';
 import {Offer, OfferDetail} from '../types/offer';
+import {Comment} from '../types/comment';
 import {NameSpace, AuthorizationStatus} from '../const';
 import {AppRoute} from '../const';
 
 const fetchOffers = createAction<Offer[]>(`${NameSpace.Offers}/fetch`);
 
-const fetchOffer = createAction<OfferDetail['id']>(`${NameSpace.Offer}/fetch`);
+const fetchOffer = createAction<OfferDetail>(`${NameSpace.Offer}/fetch`);
 
-const fetchNearOffers = createAction<OfferDetail['id']>(`${NameSpace.NearOffers}/fetch`);
+const fetchNearOffers = createAction<Offer[]>(`${NameSpace.NearOffers}/fetch`);
 
 const setOffersDataLoadingStatus = createAction<boolean>('setOffersDataLoadingStatus/fetch');
 
-const fetchComments = createAction<OfferDetail['id']>(`${NameSpace.Comments}/fetch`);
+const fetchComments = createAction<Comment[]>(`${NameSpace.Comments}/fetch`);
 
 const fetchFavorites = createAction(`${NameSpace.Favorites}/fetch`);
 

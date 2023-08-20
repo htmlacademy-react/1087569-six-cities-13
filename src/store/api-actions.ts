@@ -1,10 +1,11 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {APIRoute, AuthorizationStatus, NameSpace, AppRoute} from '../const';
-import {Offer} from '../types/offer';
+import {Offer, OfferDetail} from '../types/offer';
+import {Comment} from '../types/comment';
 import {AxiosInstance} from 'axios';
 import {AppDispatch} from '../types/state';
 import {State} from '../types/state';
-import {fetchOffers, setOffersDataLoadingStatus, requireAuthorization, redirectToRoute} from './actions';
+import {fetchOffers, fetchOffer, fetchNearOffers, fetchComments, setOffersDataLoadingStatus, requireAuthorization, redirectToRoute} from './actions';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
 import {saveToken, dropToken} from '../services/token';
@@ -14,12 +15,48 @@ const fetchOffersAction = createAsyncThunk<void, undefined, {
   state: State;
   extra: AxiosInstance;
 }>(
-  `${NameSpace.Offers}/fetchOffers`,
+  `${NameSpace.Offers}/fetch`,
   async (_arg, {dispatch, extra: api}) => {
     dispatch(setOffersDataLoadingStatus(true));
     const {data} = await api.get<Offer[]>(APIRoute.Offers);
     dispatch(fetchOffers(data));
     dispatch(setOffersDataLoadingStatus(false));
+  }
+);
+
+const fetchOfferAction = createAsyncThunk<void, OfferDetail['id'], {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  `${NameSpace.Offer}/fetch`,
+  async (offerId, {dispatch, extra: api}) => {
+    const {data} = await api.get<OfferDetail>(`${APIRoute.Offers}/${offerId}`);
+    dispatch(fetchOffer(data));
+  }
+);
+
+const fetchNearOffersAction = createAsyncThunk<void, OfferDetail['id'], {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  `${NameSpace.NearOffers}/fetch`,
+  async (offerId, {dispatch, extra: api}) => {
+    const {data} = await api.get<Offer[]>(`${APIRoute.Offers}/${offerId}${APIRoute.NearOffers}`);
+    dispatch(fetchNearOffers(data));
+  }
+);
+
+const fetchCommentsAction = createAsyncThunk<void, OfferDetail['id'], {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  `${NameSpace.Comments}/fetch`,
+  async (offerId, {dispatch, extra: api}) => {
+    const {data} = await api.get<Comment[]>(`${APIRoute.Comments}/${offerId}`);
+    dispatch(fetchComments(data));
   }
 );
 
@@ -66,4 +103,4 @@ const logoutAction = createAsyncThunk<void, undefined, {
   },
 );
 
-export {fetchOffersAction, checkAuthAction, loginAction, logoutAction};
+export {fetchOffersAction, fetchOfferAction, fetchNearOffersAction, fetchCommentsAction, checkAuthAction, loginAction, logoutAction};

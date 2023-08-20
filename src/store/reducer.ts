@@ -2,7 +2,7 @@ import {createReducer} from '@reduxjs/toolkit';
 import {Offer, OfferDetail, City} from '../types/offer';
 import {Comment} from '../types/comment';
 import {DEFAULT_CITY, CITIES, AuthorizationStatus} from '../const';
-import {fetchOffers, /*fetchOffer, fetchNearOffers, fetchComments,*/ dropOffer, setActiveCity, setOffersDataLoadingStatus, requireAuthorization} from './actions';
+import {fetchOffers, fetchOffer, fetchNearOffers, fetchComments, dropOffer, setActiveCity, setOffersDataLoadingStatus, requireAuthorization} from './actions';
 
 const initialState: {
   offers: Offer[];
@@ -29,15 +29,15 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(fetchOffers, (state, action) => {
       state.offers = action.payload;
     })
-    /*.addCase(fetchOffer, (state, action) => {
-      state.offer = detailsOffers.find((offer) => offer.id === action.payload) ?? null;
+    .addCase(fetchOffer, (state, action) => {
+      state.offer = action.payload;
     })
     .addCase(fetchNearOffers, (state, action) => {
-      state.nearOffers = offers.filter((offer) => offer.id !== action.payload);
+      state.nearOffers = action.payload;
     })
-    .addCase(fetchComments, (state) => {
-      state.comments = comments;
-    })*/
+    .addCase(fetchComments, (state, action) => {
+      state.comments = action.payload;
+    })
     .addCase(dropOffer, (state) => {
       state.offer = null;
       state.nearOffers = [];
