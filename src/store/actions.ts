@@ -21,10 +21,8 @@ const setActiveCity = createAction<string>(`${NameSpace.Offers}/setActiveCity`);
 
 const requireAuthorization = createAction<AuthorizationStatus>(`${NameSpace.User}/requireAuthorization`);
 
-const setError = createAction<string | null>('setError/fetch');
-
 const redirectToRoute = createAction<AppRoute>('app/redirectToRoute');
 
-export {fetchOffers, fetchOffer, fetchNearOffers, fetchComments, fetchFavorites, dropOffer, setActiveCity, setOffersDataLoadingStatus, requireAuthorization, setError, redirectToRoute};
+export {fetchOffers, fetchOffer, fetchNearOffers, fetchComments, fetchFavorites, dropOffer, setActiveCity, setOffersDataLoadingStatus, requireAuthorization, redirectToRoute};
 
 

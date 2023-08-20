@@ -2,7 +2,7 @@ import {createReducer} from '@reduxjs/toolkit';
 import {Offer, OfferDetail, City} from '../types/offer';
 import {Comment} from '../types/comment';
 import {DEFAULT_CITY, CITIES, AuthorizationStatus} from '../const';
-import {fetchOffers, /*fetchOffer, fetchNearOffers, fetchComments,*/ dropOffer, setActiveCity, setOffersDataLoadingStatus, requireAuthorization, setError} from './actions';
+import {fetchOffers, /*fetchOffer, fetchNearOffers, fetchComments,*/ dropOffer, setActiveCity, setOffersDataLoadingStatus, requireAuthorization} from './actions';
 
 const initialState: {
   offers: Offer[];
@@ -13,7 +13,6 @@ const initialState: {
   activeCity: City;
   isOffersDataLoading: boolean;
   authorizationStatus: AuthorizationStatus;
-  error: string | null;
 } = {
   offers: [],
   nearOffers: [],
@@ -22,8 +21,7 @@ const initialState: {
   favorites: [],
   activeCity: DEFAULT_CITY,
   isOffersDataLoading: false,
-  authorizationStatus: AuthorizationStatus.Unknown,
-  error: null
+  authorizationStatus: AuthorizationStatus.Unknown
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -52,9 +50,6 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
-    })
-    .addCase(setError, (state, action) => {
-      state.error = action.payload;
     });
 });
 

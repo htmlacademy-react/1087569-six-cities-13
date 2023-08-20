@@ -106,6 +106,4 @@ enum RequestStatus {
 
 const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
 
-const TIMEOUT_SHOW_ERROR = 2000;
-
-export {AppRoute, AuthorizationStatus, NameSpace, URL_MARKER_DEFAULT, URL_MARKER_CURRENT, DEFAULT_CITY, CITIES, SortingMap, BACKEND_URL, REQUEST_TIMEOUT, APIRoute, RequestStatus, AUTH_TOKEN_KEY_NAME, TIMEOUT_SHOW_ERROR};
+export {AppRoute, AuthorizationStatus, NameSpace, URL_MARKER_DEFAULT, URL_MARKER_CURRENT, DEFAULT_CITY, CITIES, SortingMap, BACKEND_URL, REQUEST_TIMEOUT, APIRoute, RequestStatus, AUTH_TOKEN_KEY_NAME};
