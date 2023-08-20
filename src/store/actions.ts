@@ -1,6 +1,7 @@
 import {createAction} from '@reduxjs/toolkit';
 import {Offer, OfferDetail} from '../types/offer';
 import {NameSpace, AuthorizationStatus} from '../const';
+import {AppRoute} from '../const';
 
 const fetchOffers = createAction<Offer[]>(`${NameSpace.Offers}/fetch`);
 
@@ -22,6 +23,8 @@ const requireAuthorization = createAction<AuthorizationStatus>(`${NameSpace.User
 
 const setError = createAction<string | null>('setError/fetch');
 
-export {fetchOffers, fetchOffer, fetchNearOffers, fetchComments, fetchFavorites, dropOffer, setActiveCity, setOffersDataLoadingStatus, requireAuthorization, setError};
+const redirectToRoute = createAction<AppRoute>('app/redirectToRoute');
+
+export {fetchOffers, fetchOffer, fetchNearOffers, fetchComments, fetchFavorites, dropOffer, setActiveCity, setOffersDataLoadingStatus, requireAuthorization, setError, redirectToRoute};
 
 

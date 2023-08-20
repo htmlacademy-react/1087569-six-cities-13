@@ -1,11 +1,11 @@
 import {City} from './types/offer';
 
-const AppRoute = {
-  Root: '/',
-  Favorites: '/favorites',
-  Login: '/login',
-  Offer: '/offer/:id'
-} as const;
+enum AppRoute {
+  Root = '/',
+  Favorites = '/favorites',
+  Login = '/login',
+  Offer = '/offer/:id'
+}
 
 enum AuthorizationStatus {
   Auth = 'AUTH',

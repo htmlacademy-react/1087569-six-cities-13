@@ -1,4 +1,4 @@
-import {Route, BrowserRouter, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
 import MainScreen from '../../pages/main-screen/main-screen';
 import FavoritesScreen from '../../pages/favorites-screen/favorites-screen';
@@ -8,12 +8,14 @@ import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
 import {AppRoute} from '../../const';
 import {useAppSelector} from '../../hooks';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   return(
     <HelmetProvider>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <Routes>
           <Route
             path={AppRoute.Root}
@@ -44,7 +46,7 @@ function App(): JSX.Element {
             element={<NotFoundScreen />}
           />
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     </HelmetProvider>
   );
 }
