@@ -99,12 +99,15 @@ const APIRoute = {
 } as const;
 
 enum RequestStatus {
-  Idle,
-  Pending,
-  Success,
-  Error
+  Unsent = 'UNSENT',
+  Pending = 'PENDING',
+  Success = 'SUCCESS',
+  Error = 'ERROR'
 }
 
 const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
 
-export {AppRoute, AuthorizationStatus, NameSpace, URL_MARKER_DEFAULT, URL_MARKER_CURRENT, DEFAULT_CITY, CITIES, SortingMap, BACKEND_URL, REQUEST_TIMEOUT, APIRoute, RequestStatus, AUTH_TOKEN_KEY_NAME};
+const MIN_COMMENT_LENGTH = 50;
+const MAX_COMMENT_LENGTH = 140;
+
+export {AppRoute, AuthorizationStatus, NameSpace, URL_MARKER_DEFAULT, URL_MARKER_CURRENT, DEFAULT_CITY, CITIES, SortingMap, BACKEND_URL, REQUEST_TIMEOUT, APIRoute, RequestStatus, AUTH_TOKEN_KEY_NAME, MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH};

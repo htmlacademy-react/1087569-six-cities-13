@@ -8,4 +8,9 @@ type Comment = {
   rating: number;
 }
 
-export type {Comment};
+type CommentData = {
+  comment: string;
+  rating: number;
+}
+
+export type {Comment, CommentData};

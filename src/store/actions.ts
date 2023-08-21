@@ -16,6 +16,8 @@ const fetchComments = createAction<Comment[]>(`${NameSpace.Comments}/fetch`);
 
 const fetchFavorites = createAction<Offer[]>(`${NameSpace.Favorites}/fetch`);
 
+const postComment = createAction<Comment>(`${NameSpace.Comments}/add`);
+
 const dropOffer = createAction(`${NameSpace.Offer}/drop`);
 
 const setActiveCity = createAction<string>(`${NameSpace.Offers}/setActiveCity`);
@@ -24,6 +26,8 @@ const requireAuthorization = createAction<AuthorizationStatus>(`${NameSpace.User
 
 const redirectToRoute = createAction<AppRoute>('app/redirectToRoute');
 
-export {fetchOffers, fetchOffer, fetchNearOffers, fetchComments, fetchFavorites, dropOffer, setActiveCity, setOffersDataLoadingStatus, requireAuthorization, redirectToRoute};
+const dropSendingStatus = createAction(`${NameSpace.Comments}/dropSendingStatus`);
+
+export {fetchOffers, fetchOffer, fetchNearOffers, fetchComments, fetchFavorites, postComment, dropSendingStatus, dropOffer, setActiveCity, setOffersDataLoadingStatus, requireAuthorization, redirectToRoute};
 
 
