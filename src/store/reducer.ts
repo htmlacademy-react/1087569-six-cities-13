@@ -1,8 +1,8 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {Offer, OfferDetail, City} from '../types/offer';
 import {Comment} from '../types/comment';
-import {DEFAULT_CITY, CITIES} from '../const';
-import {fetchOffers, /*fetchOffer, fetchNearOffers, fetchComments,*/ dropOffer, setActiveCity, setOffersDataLoadingStatus} from './actions';
+import {DEFAULT_CITY, CITIES, AuthorizationStatus} from '../const';
+import {fetchOffers, fetchOffer, fetchNearOffers, fetchComments, fetchFavorites, dropOffer, setActiveCity, setOffersDataLoadingStatus, requireAuthorization} from './actions';
 
 const initialState: {
   offers: Offer[];
@@ -12,6 +12,7 @@ const initialState: {
   favorites: Offer[];
   activeCity: City;
   isOffersDataLoading: boolean;
+  authorizationStatus: AuthorizationStatus;
 } = {
   offers: [],
   nearOffers: [],
@@ -19,7 +20,8 @@ const initialState: {
   offer: null,
   favorites: [],
   activeCity: DEFAULT_CITY,
-  isOffersDataLoading: false
+  isOffersDataLoading: false,
+  authorizationStatus: AuthorizationStatus.Unknown
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -27,15 +29,18 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(fetchOffers, (state, action) => {
       state.offers = action.payload;
     })
-    /*.addCase(fetchOffer, (state, action) => {
-      state.offer = detailsOffers.find((offer) => offer.id === action.payload) ?? null;
+    .addCase(fetchOffer, (state, action) => {
+      state.offer = action.payload;
     })
     .addCase(fetchNearOffers, (state, action) => {
-      state.nearOffers = offers.filter((offer) => offer.id !== action.payload);
+      state.nearOffers = action.payload;
     })
-    .addCase(fetchComments, (state) => {
-      state.comments = comments;
-    })*/
+    .addCase(fetchComments, (state, action) => {
+      state.comments = action.payload;
+    })
+    .addCase(fetchFavorites, (state, action) => {
+      state.favorites = action.payload;
+    })
     .addCase(dropOffer, (state) => {
       state.offer = null;
       state.nearOffers = [];
@@ -45,6 +50,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setOffersDataLoadingStatus, (state, action) => {
       state.isOffersDataLoading = action.payload;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
     });
 });
 

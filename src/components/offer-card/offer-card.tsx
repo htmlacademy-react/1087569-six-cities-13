@@ -6,7 +6,7 @@ import CommentsList from '../comments-list/comments-list';
 import Map from '../map/map';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {useEffect} from 'react';
-import {fetchComments} from '../../store/actions';
+import {fetchCommentsAction} from '../../store/api-actions';
 
 type OfferCardProps = {
   offer: OfferDetail;
@@ -22,7 +22,7 @@ function OfferCard({offer, nearOffers, activeCard}: OfferCardProps): JSX.Element
   const comments = useAppSelector((state) => state.comments);
 
   useEffect(() => {
-    dispatch(fetchComments(id));
+    dispatch(fetchCommentsAction(id));
   }, [id, dispatch]);
 
   return (

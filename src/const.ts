@@ -1,11 +1,11 @@
 import {City} from './types/offer';
 
-const AppRoute = {
-  Root: '/',
-  Favorites: '/favorites',
-  Login: '/login',
-  Offer: '/offer/:id'
-} as const;
+enum AppRoute {
+  Root = '/',
+  Favorites = '/favorites',
+  Login = '/login',
+  Offer = '/offer/:id'
+}
 
 enum AuthorizationStatus {
   Auth = 'AUTH',
@@ -104,4 +104,6 @@ enum RequestStatus {
   Error
 }
 
-export {AppRoute, AuthorizationStatus, NameSpace, URL_MARKER_DEFAULT, URL_MARKER_CURRENT, DEFAULT_CITY, CITIES, SortingMap, BACKEND_URL, REQUEST_TIMEOUT, APIRoute, RequestStatus};
+const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
+
+export {AppRoute, AuthorizationStatus, NameSpace, URL_MARKER_DEFAULT, URL_MARKER_CURRENT, DEFAULT_CITY, CITIES, SortingMap, BACKEND_URL, REQUEST_TIMEOUT, APIRoute, RequestStatus, AUTH_TOKEN_KEY_NAME};

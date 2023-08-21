@@ -6,10 +6,11 @@ import {useParams} from 'react-router-dom';
 import {CardsList} from '../../components/cards-list/cards-list';
 import {useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {dropOffer, fetchNearOffers, fetchOffer} from '../../store/actions';
+import {dropOffer} from '../../store/actions';
+import {fetchOfferAction, fetchNearOffersAction} from '../../store/api-actions';
 
 function OfferScreen(): JSX.Element {
-  const{id} = useParams();
+  const {id = ''} = useParams();
   const dispatch = useAppDispatch();
   const offer = useAppSelector((state) => state.offer);
   const [activeCard, setActiveCard] = useState<Offer | undefined>(undefined);
@@ -22,8 +23,8 @@ function OfferScreen(): JSX.Element {
 
   useEffect(() => {
     if(id) {
-      dispatch(fetchOffer(id));
-      dispatch(fetchNearOffers(id));
+      dispatch(fetchOfferAction(id));
+      dispatch(fetchNearOffersAction(id));
     }
 
     return () => {
