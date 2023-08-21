@@ -42,7 +42,7 @@ function App(): JSX.Element {
             element={<OfferScreen />}
           />
           <Route
-            path='*'
+            path={AppRoute.NotFound}
             element={<NotFoundScreen />}
           />
         </Routes>
