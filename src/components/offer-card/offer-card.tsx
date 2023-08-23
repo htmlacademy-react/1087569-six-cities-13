@@ -8,6 +8,9 @@ import {useAppDispatch, useAppSelector} from '../../hooks';
 import {useEffect} from 'react';
 import {fetchCommentsAction} from '../../store/api-actions';
 import {AuthorizationStatus} from '../../const';
+import {getActiveCity} from '../../store/offers-process/offers-process.selectors';
+import {getComments} from '../../store/comments-process/comments-process.selectors';
+import {getAuthorizationStatus} from '../../store/user-process/user-process.selectors';
 
 type OfferCardProps = {
   offer: OfferDetail;
@@ -19,9 +22,9 @@ function OfferCard({offer, nearOffers, activeCard}: OfferCardProps): JSX.Element
   const {images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description, id} = offer;
   const {name, avatarUrl, isPro} = host;
   const dispatch = useAppDispatch();
-  const currentCity = useAppSelector((state) => state.activeCity);
-  const comments = useAppSelector((state) => state.comments);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const currentCity = useAppSelector(getActiveCity);
+  const comments = useAppSelector(getComments);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   useEffect(() => {
     dispatch(fetchCommentsAction(id));

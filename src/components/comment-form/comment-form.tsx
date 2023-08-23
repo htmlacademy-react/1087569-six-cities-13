@@ -1,9 +1,10 @@
-import { ChangeEvent, useState, Fragment, FormEvent, useEffect } from 'react';
-import { postCommentAction } from '../../store/api-actions';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { OfferDetail } from '../../types/offer';
-import { MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH, RequestStatus } from '../../const';
-import { dropSendingStatus } from '../../store/actions';
+import {ChangeEvent, useState, Fragment, FormEvent, useEffect} from 'react';
+import {postCommentAction} from '../../store/api-actions';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {OfferDetail} from '../../types/offer';
+import {MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH, RequestStatus} from '../../const';
+import {dropSendingStatus} from '../../store/comments-process/comments-process.slice';
+import {getSendingCommentStatus} from '../../store/comments-process/comments-process.selectors';
 
 const ratingMap = {
   '5': 'perfect',
@@ -17,11 +18,11 @@ type CommentFormProps = {
   offerId: OfferDetail['id'];
 }
 
-function CommentForm({ offerId }: CommentFormProps): JSX.Element {
+function CommentForm({offerId}: CommentFormProps): JSX.Element {
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState('');
   const dispatch = useAppDispatch();
-  const sendingStatus = useAppSelector((state) => state.sendingCommentStatus);
+  const sendingStatus = useAppSelector(getSendingCommentStatus);
 
   const handleCommentChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     setComment(evt.target.value);
