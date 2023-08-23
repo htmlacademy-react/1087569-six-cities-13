@@ -1,13 +1,18 @@
 import Logo from '../logo/logo';
-import { useAppSelector, useAppDispatch } from '../../hooks';
-import { Link } from 'react-router-dom';
-import { logoutAction } from '../../store/api-actions';
-import { AuthorizationStatus, AppRoute } from '../../const';
+import {useAppSelector, useAppDispatch} from '../../hooks';
+import {Link} from 'react-router-dom';
+import {logoutAction} from '../../store/api-actions';
+import {AuthorizationStatus, AppRoute} from '../../const';
+import {MouseEvent} from 'react';
 
 function Header(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const favorites = useAppSelector((state) => state.favorites);
   const dispatch = useAppDispatch();
+  const handleLogoutClick = (evt: MouseEvent<HTMLElement>) => {
+    evt.preventDefault();
+    dispatch(logoutAction());
+  };
 
   return (
     <header className="header">
@@ -28,10 +33,7 @@ function Header(): JSX.Element {
                   </li>
                   <li className="header__nav-item">
                     <Link
-                      onClick={(evt) => {
-                        evt.preventDefault();
-                        dispatch(logoutAction());
-                      }}
+                      onClick={handleLogoutClick}
                       className="header__nav-link"
                       to={AppRoute.Root}
                     >

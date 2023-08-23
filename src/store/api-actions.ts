@@ -1,11 +1,11 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {APIRoute, AuthorizationStatus, NameSpace, AppRoute} from '../const';
 import {Offer, OfferDetail} from '../types/offer';
-import {Comment} from '../types/comment';
+import {Comment, CommentData} from '../types/comment';
 import {AxiosInstance} from 'axios';
 import {AppDispatch} from '../types/state';
 import {State} from '../types/state';
-import {fetchOffers, fetchOffer, fetchNearOffers, fetchComments, fetchFavorites, setOffersDataLoadingStatus, requireAuthorization, redirectToRoute} from './actions';
+import {fetchOffers, fetchOffer, fetchNearOffers, fetchComments, fetchFavorites, postComment, setOffersDataLoadingStatus, setOfferDataLoadingStatus, requireAuthorization, redirectToRoute} from './actions';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
 import {saveToken, dropToken} from '../services/token';
@@ -31,8 +31,10 @@ const fetchOfferAction = createAsyncThunk<void, OfferDetail['id'], {
 }>(
   `${NameSpace.Offer}/fetch`,
   async (offerId, {dispatch, extra: api}) => {
+    dispatch(setOfferDataLoadingStatus(true));
     const {data} = await api.get<OfferDetail>(`${APIRoute.Offers}/${offerId}`);
     dispatch(fetchOffer(data));
+    dispatch(setOfferDataLoadingStatus(false));
   }
 );
 
@@ -69,6 +71,18 @@ const fetchOFavoritesAction = createAsyncThunk<void, undefined, {
   async (_arg, {dispatch, extra: api}) => {
     const {data} = await api.get<Offer[]>(APIRoute.Favorites);
     dispatch(fetchFavorites(data));
+  }
+);
+
+const postCommentAction = createAsyncThunk<void, {commentData: CommentData; offerId: OfferDetail['id']}, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  `${NameSpace.Comments}/add`,
+  async ({commentData, offerId}, {dispatch, extra: api}) => {
+    const {data} = await api.post<Comment>(`${APIRoute.Comments}/${offerId}`, commentData);
+    dispatch(postComment(data));
   }
 );
 
@@ -115,4 +129,4 @@ const logoutAction = createAsyncThunk<void, undefined, {
   },
 );
 
-export {fetchOffersAction, fetchOfferAction, fetchNearOffersAction, fetchCommentsAction, fetchOFavoritesAction, checkAuthAction, loginAction, logoutAction};
+export {fetchOffersAction, fetchOfferAction, fetchNearOffersAction, fetchCommentsAction, fetchOFavoritesAction, postCommentAction, checkAuthAction, loginAction, logoutAction};

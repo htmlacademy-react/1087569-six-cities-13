@@ -1,12 +1,13 @@
 import {OfferDetail, Offer} from '../../types/offer';
 import OfferGalleryList from '../offer-gallery-list/offer-gallery-list';
 import GoodsList from '../goods-list/goods-list';
-import CommentForm from '../form-comment/comment-form';
+import CommentForm from '../comment-form/comment-form';
 import CommentsList from '../comments-list/comments-list';
 import Map from '../map/map';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {useEffect} from 'react';
 import {fetchCommentsAction} from '../../store/api-actions';
+import {AuthorizationStatus} from '../../const';
 
 type OfferCardProps = {
   offer: OfferDetail;
@@ -20,6 +21,7 @@ function OfferCard({offer, nearOffers, activeCard}: OfferCardProps): JSX.Element
   const dispatch = useAppDispatch();
   const currentCity = useAppSelector((state) => state.activeCity);
   const comments = useAppSelector((state) => state.comments);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   useEffect(() => {
     dispatch(fetchCommentsAction(id));
@@ -94,7 +96,7 @@ function OfferCard({offer, nearOffers, activeCard}: OfferCardProps): JSX.Element
           <section className="offer__reviews reviews">
             <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
             <CommentsList comments={comments} />
-            <CommentForm />
+            {authorizationStatus === AuthorizationStatus.Auth && <CommentForm offerId = {id}/>}
           </section>
         </div>
       </div>

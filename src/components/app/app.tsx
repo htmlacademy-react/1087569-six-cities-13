@@ -10,9 +10,19 @@ import {AppRoute} from '../../const';
 import {useAppSelector} from '../../hooks';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
+import {fetchOffersAction, fetchOFavoritesAction, checkAuthAction} from '../../store/api-actions';
+import {useEffect} from 'react';
+import {store} from '../../store';
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+
+  useEffect(() => {
+    store.dispatch(checkAuthAction());
+    store.dispatch(fetchOFavoritesAction());
+    store.dispatch(fetchOffersAction());
+  }, []);
+
   return(
     <HelmetProvider>
       <HistoryRouter history={browserHistory}>
@@ -42,7 +52,7 @@ function App(): JSX.Element {
             element={<OfferScreen />}
           />
           <Route
-            path='*'
+            path={AppRoute.NotFound}
             element={<NotFoundScreen />}
           />
         </Routes>

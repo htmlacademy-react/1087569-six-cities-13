@@ -1,16 +1,16 @@
 import Header from '../../components/header/header';
-import { CardsList } from '../../components/cards-list/cards-list';
-import { Sorting } from '../../components/sorting/sorting';
-import { TSorting } from '../../types/sorting';
-import { Offer } from '../../types/offer';
-import { Helmet } from 'react-helmet-async';
+import {CardsList} from '../../components/cards-list/cards-list';
+import {Sorting} from '../../components/sorting/sorting';
+import {TSorting} from '../../types/sorting';
+import {Offer} from '../../types/offer';
+import {Helmet} from 'react-helmet-async';
 import Map from '../../components/map/map';
-import { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { CitiesList } from '../../components/cities-list/cities-list';
-import { findOffersByCity, sorting } from '../../utils';
-import { fetchOffers } from '../../store/actions';
-import { Loader } from '../../components/loader/loader';
+import {useEffect, useState} from 'react';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {CitiesList} from '../../components/cities-list/cities-list';
+import {findOffersByCity, sorting} from '../../utils';
+import {fetchOffers} from '../../store/actions';
+import {Loader} from '../../components/loader/loader';
 
 function MainScreen(): JSX.Element {
   const [activeCard, setActiveCard] = useState<Offer | undefined>(undefined);
