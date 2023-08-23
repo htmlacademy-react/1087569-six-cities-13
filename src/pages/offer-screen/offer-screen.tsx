@@ -8,11 +8,13 @@ import {useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {dropOffer} from '../../store/actions';
 import {fetchOfferAction, fetchNearOffersAction} from '../../store/api-actions';
+import {Loader} from '../../components/loader/loader';
 
 function OfferScreen(): JSX.Element {
   const {id = ''} = useParams();
   const dispatch = useAppDispatch();
   const offer = useAppSelector((state) => state.offer);
+  const isOfferDataLoading = useAppSelector((state) => state.isOfferDataLoading);
   const [activeCard, setActiveCard] = useState<Offer | undefined>(undefined);
   const nearOffers = useAppSelector((state) => state.nearOffers);
   const handleMouseEnterItem = (nearId: string | undefined) => {
@@ -22,7 +24,7 @@ function OfferScreen(): JSX.Element {
   };
 
   useEffect(() => {
-    if(id) {
+    if (id) {
       dispatch(fetchOfferAction(id));
       dispatch(fetchNearOffersAction(id));
     }
@@ -32,24 +34,25 @@ function OfferScreen(): JSX.Element {
     };
   }, [id, dispatch]);
 
-  return(
-    <div className="page">
-      <Header />
+  return isOfferDataLoading ? <Loader /> :
+    (
+      <div className="page">
+        <Header />
 
-      <main className="page__main page__main--offer">
-        <Helmet>
-          <title>Страница товара</title>
-        </Helmet>
-        {offer ? <OfferCard offer={offer} nearOffers={nearOffers} activeCard={activeCard} /> : ''}
-        <div className="container">
-          <section className="near-places places">
-            <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <CardsList offers={nearOffers} isNear onCardMouseEnter={handleMouseEnterItem}/>
-          </section>
-        </div>
-      </main>
-    </div>
-  );
+        <main className="page__main page__main--offer">
+          <Helmet>
+            <title>Страница товара</title>
+          </Helmet>
+          {offer ? <OfferCard offer={offer} nearOffers={nearOffers} activeCard={activeCard} /> : ''}
+          <div className="container">
+            <section className="near-places places">
+              <h2 className="near-places__title">Other places in the neighbourhood</h2>
+              <CardsList offers={nearOffers} isNear onCardMouseEnter={handleMouseEnterItem} />
+            </section>
+          </div>
+        </main>
+      </div>
+    );
 }
 
 export default OfferScreen;

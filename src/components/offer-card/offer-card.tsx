@@ -1,7 +1,7 @@
 import {OfferDetail, Offer} from '../../types/offer';
 import OfferGalleryList from '../offer-gallery-list/offer-gallery-list';
 import GoodsList from '../goods-list/goods-list';
-import CommentForm from '../form-comment/comment-form';
+import CommentForm from '../comment-form/comment-form';
 import CommentsList from '../comments-list/comments-list';
 import Map from '../map/map';
 import {useAppDispatch, useAppSelector} from '../../hooks';

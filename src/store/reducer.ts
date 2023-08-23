@@ -2,7 +2,7 @@ import {createReducer} from '@reduxjs/toolkit';
 import {Offer, OfferDetail, City} from '../types/offer';
 import {Comment} from '../types/comment';
 import {DEFAULT_CITY, CITIES, AuthorizationStatus, RequestStatus} from '../const';
-import {fetchOffers, fetchOffer, fetchNearOffers, fetchComments, fetchFavorites, postComment, dropSendingStatus, dropOffer, setActiveCity, setOffersDataLoadingStatus, requireAuthorization} from './actions';
+import {fetchOffers, fetchOffer, fetchNearOffers, fetchComments, fetchFavorites, postComment, dropSendingStatus, dropOffer, setActiveCity, setOffersDataLoadingStatus, setOfferDataLoadingStatus, requireAuthorization} from './actions';
 import {postCommentAction} from './api-actions';
 
 const initialState: {
@@ -13,6 +13,7 @@ const initialState: {
   favorites: Offer[];
   activeCity: City;
   isOffersDataLoading: boolean;
+  isOfferDataLoading: boolean;
   authorizationStatus: AuthorizationStatus;
   sendingCommentStatus: string;
 } = {
@@ -23,6 +24,7 @@ const initialState: {
   favorites: [],
   activeCity: DEFAULT_CITY,
   isOffersDataLoading: false,
+  isOfferDataLoading: false,
   authorizationStatus: AuthorizationStatus.Unknown,
   sendingCommentStatus: RequestStatus.Unsent
 };
@@ -68,6 +70,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setOffersDataLoadingStatus, (state, action) => {
       state.isOffersDataLoading = action.payload;
+    })
+    .addCase(setOfferDataLoadingStatus, (state, action) => {
+      state.isOfferDataLoading = action.payload;
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
