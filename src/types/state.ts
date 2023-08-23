@@ -1,5 +1,5 @@
 import {store} from '../store';
-import {AuthorizationStatus} from '../const';
+import {AuthorizationStatus, RequestStatus} from '../const';
 import {Offer, City, OfferDetail} from './offer';
 import {Comment} from './comment';
 
@@ -29,7 +29,7 @@ export type FavoritesProcess = {
 
 export type CommentsProcess = {
   comments: Comment[];
-  sendingCommentStatus: string;
+  sendingCommentStatus: RequestStatus;
 }
 
 export type State = ReturnType<typeof store.getState>;
