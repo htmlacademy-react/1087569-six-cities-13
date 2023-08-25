@@ -20,7 +20,8 @@ const NameSpace = {
   NearOffers: 'NEAR_OFFERS',
   Favorites: 'FAVORITES',
   Comments: 'COMMENTS',
-  User: 'USER'
+  User: 'USER',
+  App: 'APP'
 } as const;
 
 const URL_MARKER_DEFAULT = '../../../markup/img/pin.svg';

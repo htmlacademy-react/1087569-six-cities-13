@@ -6,17 +6,20 @@ import {useParams} from 'react-router-dom';
 import {CardsList} from '../../components/cards-list/cards-list';
 import {useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {dropOffer} from '../../store/actions';
+import {dropOffer} from '../../store/offer-process/offer-process.slice';
 import {fetchOfferAction, fetchNearOffersAction} from '../../store/api-actions';
 import {Loader} from '../../components/loader/loader';
+import {getOffer, getOfferLoadingStatus} from '../../store/offer-process/offer-process.selectors';
+import {getNearOffers} from '../../store/near-offers-process/near-offers-process.selectors';
+import {clearNearOffers} from '../../store/near-offers-process/near-offers-process.slice';
 
 function OfferScreen(): JSX.Element {
   const {id = ''} = useParams();
   const dispatch = useAppDispatch();
-  const offer = useAppSelector((state) => state.offer);
-  const isOfferDataLoading = useAppSelector((state) => state.isOfferDataLoading);
+  const offer = useAppSelector(getOffer);
+  const isOfferDataLoading = useAppSelector(getOfferLoadingStatus);
   const [activeCard, setActiveCard] = useState<Offer | undefined>(undefined);
-  const nearOffers = useAppSelector((state) => state.nearOffers);
+  const nearOffers = useAppSelector(getNearOffers);
   const handleMouseEnterItem = (nearId: string | undefined) => {
     const currentCard = nearOffers.find((nearOffer) => nearOffer.id === nearId);
 
@@ -31,6 +34,7 @@ function OfferScreen(): JSX.Element {
 
     return () => {
       dispatch(dropOffer());
+      dispatch(clearNearOffers());
     };
   }, [id, dispatch]);
 

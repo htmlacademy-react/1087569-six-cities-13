@@ -5,22 +5,22 @@ import {TSorting} from '../../types/sorting';
 import {Offer} from '../../types/offer';
 import {Helmet} from 'react-helmet-async';
 import Map from '../../components/map/map';
-import {useEffect, useState} from 'react';
-import {useAppDispatch, useAppSelector} from '../../hooks';
+import {useState} from 'react';
+import {useAppSelector} from '../../hooks';
 import {CitiesList} from '../../components/cities-list/cities-list';
-import {findOffersByCity, sorting} from '../../utils';
-import {fetchOffers} from '../../store/actions';
 import {Loader} from '../../components/loader/loader';
+import {getOffers, getOffersLoadingStatus} from '../../store/offers-process/offers-process.selectors';
+import {getActiveCity} from '../../store/offers-process/offers-process.selectors';
+import {getOffersByCity} from '../../utils';
 
 function MainScreen(): JSX.Element {
   const [activeCard, setActiveCard] = useState<Offer | undefined>(undefined);
   const [currentSorting, setCurrentSorting] = useState<TSorting>('Popular');
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+  const isOffersDataLoading = useAppSelector(getOffersLoadingStatus);
 
-  const dispatch = useAppDispatch();
-  const currentCity = useAppSelector((state) => state.activeCity);
-  const offers = useAppSelector((state) => state.offers);
-  const offersByCity = sorting[currentSorting](findOffersByCity(offers, currentCity.name));
+  const currentCity = useAppSelector(getActiveCity);
+  const offers = useAppSelector(getOffers);
+  const offersByCity = getOffersByCity(currentSorting, offers, currentCity.name);
 
   const handleMouseEnterItem = (id: string | undefined) => {
     const currentCard = offers.find((offer) => offer.id === id);
@@ -30,10 +30,6 @@ function MainScreen(): JSX.Element {
   const handleSortChange = (newSorting: TSorting) => {
     setCurrentSorting(newSorting);
   };
-
-  useEffect(() => {
-    dispatch(fetchOffers);
-  }, [dispatch]);
 
   return (
     <div className="page page--gray page--main">

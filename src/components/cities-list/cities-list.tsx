@@ -2,7 +2,7 @@ import {CITIES, AppRoute} from '../../const';
 import {Link} from 'react-router-dom';
 import {useAppDispatch} from '../../hooks';
 import {MouseEvent} from 'react';
-import {setActiveCity} from '../../store/actions';
+import {setActiveCity} from '../../store/offers-process/offers-process.slice';
 import cn from 'classnames';
 import {City} from '../../types/offer';
 

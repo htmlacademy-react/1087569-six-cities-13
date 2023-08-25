@@ -4,12 +4,13 @@ import {useAppSelector, useAppDispatch} from '../../hooks';
 import {useRef, FormEvent} from 'react';
 import {loginAction} from '../../store/api-actions';
 import {Link} from 'react-router-dom';
+import {getActiveCity} from '../../store/offers-process/offers-process.selectors';
 
 function LoginScreen(): JSX.Element {
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
-  const currentCity = useAppSelector((state) => state.activeCity);
+  const currentCity = useAppSelector(getActiveCity);
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
