@@ -7,22 +7,22 @@ import OfferScreen from '../../pages/offer-screen/offer-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
 import {AppRoute} from '../../const';
-import {useAppSelector} from '../../hooks';
+import {useAppSelector, useAppDispatch} from '../../hooks';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 import {fetchOffersAction, fetchFavoritesAction, checkAuthAction} from '../../store/api-actions';
 import {useEffect} from 'react';
-import {store} from '../../store';
 import {getAuthorizationStatus} from '../../store/user-process/user-process.selectors';
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    store.dispatch(checkAuthAction());
-    store.dispatch(fetchFavoritesAction());
-    store.dispatch(fetchOffersAction());
-  }, []);
+    dispatch(checkAuthAction());
+    dispatch(fetchFavoritesAction());
+    dispatch(fetchOffersAction());
+  }, [dispatch]);
 
   return(
     <HelmetProvider>

@@ -8,10 +8,10 @@ import Map from '../../components/map/map';
 import {useState} from 'react';
 import {useAppSelector} from '../../hooks';
 import {CitiesList} from '../../components/cities-list/cities-list';
-import {findOffersByCity, sorting} from '../../utils';
 import {Loader} from '../../components/loader/loader';
 import {getOffers, getOffersLoadingStatus} from '../../store/offers-process/offers-process.selectors';
 import {getActiveCity} from '../../store/offers-process/offers-process.selectors';
+import {getOffersByCity} from '../../utils';
 
 function MainScreen(): JSX.Element {
   const [activeCard, setActiveCard] = useState<Offer | undefined>(undefined);
@@ -20,7 +20,7 @@ function MainScreen(): JSX.Element {
 
   const currentCity = useAppSelector(getActiveCity);
   const offers = useAppSelector(getOffers);
-  const offersByCity = sorting[currentSorting](findOffersByCity(offers, currentCity.name));
+  const offersByCity = getOffersByCity(currentSorting, offers, currentCity.name);
 
   const handleMouseEnterItem = (id: string | undefined) => {
     const currentCard = offers.find((offer) => offer.id === id);

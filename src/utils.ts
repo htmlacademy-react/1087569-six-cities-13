@@ -2,6 +2,7 @@ import {Offer} from './types/offer';
 import {TSorting} from './types/sorting';
 import dayjs from 'dayjs';
 import {Comment} from './types/comment';
+import {City} from './types/offer';
 
 const findOffersByCity = (offers: Offer[], cityName: string) => offers.filter((offer) => offer.city.name === cityName);
 
@@ -23,4 +24,6 @@ const DATE_COMMENT_FORMAT = 'MMMM YYYY';
 
 const formatCommentDate = (commentDate: Comment['date']) => commentDate ? dayjs(commentDate).format(DATE_COMMENT_FORMAT) : '';
 
-export {findOffersByCity, sorting, formatCommentDate};
+const getOffersByCity = (currentSort: TSorting, offers: Offer[], cityName: City['name']) => sorting[currentSort](findOffersByCity(offers, cityName));
+
+export {findOffersByCity, sorting, formatCommentDate, getOffersByCity};
