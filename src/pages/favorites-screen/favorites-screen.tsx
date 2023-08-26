@@ -6,6 +6,7 @@ import {getFavorites, getFavoritesLoadingStatus} from '../../store/favorites-pro
 import {Loader} from '../../components/loader/loader';
 import {getOffersByCity} from '../../utils';
 import {SortingMap} from '../../const';
+import {Footer} from '../../components/footer/footer';
 
 function FavoritesScreen(): JSX.Element {
   const favoritesOffers = useAppSelector(getFavorites);
@@ -39,11 +40,7 @@ function FavoritesScreen(): JSX.Element {
           </section>
         </div>
       </main>
-      <footer className="footer container">
-        <a className="footer__logo-link" href="main.html">
-          <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33"/>
-        </a>
-      </footer>
+      <Footer />
     </div>
   );
 }
