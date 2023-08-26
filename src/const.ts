@@ -24,6 +24,11 @@ const NameSpace = {
   App: 'APP'
 } as const;
 
+enum FavoriteStatus {
+  Add = 1,
+  Delete = 0
+}
+
 const URL_MARKER_DEFAULT = '../../../markup/img/pin.svg';
 const URL_MARKER_CURRENT = '../../../markup/img/pin-active.svg';
 
@@ -111,4 +116,4 @@ const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
 const MIN_COMMENT_LENGTH = 50;
 const MAX_COMMENT_LENGTH = 140;
 
-export {AppRoute, AuthorizationStatus, NameSpace, URL_MARKER_DEFAULT, URL_MARKER_CURRENT, DEFAULT_CITY, CITIES, SortingMap, BACKEND_URL, REQUEST_TIMEOUT, APIRoute, RequestStatus, AUTH_TOKEN_KEY_NAME, MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH};
+export {AppRoute, AuthorizationStatus, NameSpace, URL_MARKER_DEFAULT, URL_MARKER_CURRENT, DEFAULT_CITY, CITIES, SortingMap, BACKEND_URL, REQUEST_TIMEOUT, APIRoute, RequestStatus, AUTH_TOKEN_KEY_NAME, MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH, FavoriteStatus};

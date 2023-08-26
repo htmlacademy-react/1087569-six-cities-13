@@ -1,5 +1,5 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {APIRoute, NameSpace, AppRoute} from '../const';
+import {APIRoute, NameSpace, AppRoute, FavoriteStatus} from '../const';
 import {Offer, OfferDetail} from '../types/offer';
 import {Comment, CommentData} from '../types/comment';
 import {AxiosInstance} from 'axios';
@@ -62,6 +62,19 @@ const fetchCommentsAction = createAsyncThunk<Comment[], OfferDetail['id'], {
   }
 );
 
+const postCommentAction = createAsyncThunk<Comment, {commentData: CommentData; offerId: OfferDetail['id']}, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  `${NameSpace.Comments}/add`,
+  async ({commentData, offerId}, {extra: api}) => {
+    const {data} = await api.post<Comment>(`${APIRoute.Comments}/${offerId}`, commentData);
+
+    return data;
+  }
+);
+
 const fetchFavoritesAction = createAsyncThunk<Offer[], undefined, {
   dispatch: AppDispatch;
   state: State;
@@ -75,14 +88,27 @@ const fetchFavoritesAction = createAsyncThunk<Offer[], undefined, {
   }
 );
 
-const postCommentAction = createAsyncThunk<Comment, {commentData: CommentData; offerId: OfferDetail['id']}, {
+const addFavoriteAction = createAsyncThunk<OfferDetail, OfferDetail['id'], {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
-  `${NameSpace.Comments}/add`,
-  async ({commentData, offerId}, {extra: api}) => {
-    const {data} = await api.post<Comment>(`${APIRoute.Comments}/${offerId}`, commentData);
+  `${NameSpace.Favorites}/add`,
+  async (id, {extra: api}) => {
+    const {data} = await api.post<OfferDetail>(`${APIRoute.Favorites}/${id}/${FavoriteStatus.Add}`);
+
+    return data;
+  }
+);
+
+const deleteFavoriteAction = createAsyncThunk<OfferDetail, OfferDetail['id'], {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  `${NameSpace.Favorites}/delete`,
+  async (id, {extra: api}) => {
+    const {data} = await api.post<OfferDetail>(`${APIRoute.Favorites}/${id}/${FavoriteStatus.Delete}`);
 
     return data;
   }
@@ -124,4 +150,4 @@ const logoutAction = createAsyncThunk<void, undefined, {
   },
 );
 
-export {fetchOffersAction, fetchOfferAction, fetchNearOffersAction, fetchCommentsAction, fetchFavoritesAction, postCommentAction, checkAuthAction, loginAction, logoutAction};
+export {fetchOffersAction, fetchOfferAction, fetchNearOffersAction, fetchCommentsAction, fetchFavoritesAction, addFavoriteAction, deleteFavoriteAction, postCommentAction, checkAuthAction, loginAction, logoutAction};

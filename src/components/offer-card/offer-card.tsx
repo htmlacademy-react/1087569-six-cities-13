@@ -5,12 +5,13 @@ import CommentForm from '../comment-form/comment-form';
 import CommentsList from '../comments-list/comments-list';
 import Map from '../map/map';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {fetchCommentsAction} from '../../store/api-actions';
 import {AuthorizationStatus} from '../../const';
 import {getActiveCity} from '../../store/offers-process/offers-process.selectors';
 import {getComments} from '../../store/comments-process/comments-process.selectors';
 import {getAuthorizationStatus} from '../../store/user-process/user-process.selectors';
+import {BookmarkButton} from '../bookmark-button/bookmark-button';
 
 type OfferCardProps = {
   offer: OfferDetail;
@@ -19,12 +20,14 @@ type OfferCardProps = {
 }
 
 function OfferCard({offer, nearOffers, activeCard}: OfferCardProps): JSX.Element {
-  const {images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description, id} = offer;
+  const {images, isPremium, isFavorite, title, rating, type, bedrooms, maxAdults, price, goods, host, description, id} = offer;
   const {name, avatarUrl, isPro} = host;
+  const [activeFavorite, setActiveFavorite] = useState(isFavorite);
   const dispatch = useAppDispatch();
   const currentCity = useAppSelector(getActiveCity);
   const comments = useAppSelector(getComments);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const handleBookmarkButtonClick = () => setActiveFavorite((prev) => !prev);
 
   useEffect(() => {
     dispatch(fetchCommentsAction(id));
@@ -43,12 +46,7 @@ function OfferCard({offer, nearOffers, activeCard}: OfferCardProps): JSX.Element
             <h1 className="offer__name">
               {title}
             </h1>
-            <button className="offer__bookmark-button button" type="button">
-              <svg className="offer__bookmark-icon" width="31" height="33">
-                <use xlinkHref="#icon-bookmark"></use>
-              </svg>
-              <span className="visually-hidden">To bookmarks</span>
-            </button>
+            <BookmarkButton id={id} isFavorite={activeFavorite} block='offer' onClick={handleBookmarkButtonClick} isDetail />
           </div>
           <div className="offer__rating rating">
             <div className="offer__stars rating__stars">
