@@ -12,6 +12,10 @@ import {Loader} from '../../components/loader/loader';
 import {getOffers, getOffersLoadingStatus} from '../../store/offers-process/offers-process.selectors';
 import {getActiveCity} from '../../store/offers-process/offers-process.selectors';
 import {getOffersByCity} from '../../utils';
+import {getAuthorizationStatus} from '../../store/user-process/user-process.selectors';
+import {AuthorizationStatus} from '../../const';
+import {MainPageEmpty} from '../../components/main-page-empty/main-page-empty';
+import cn from 'classnames';
 
 function MainScreen(): JSX.Element {
   const [activeCard, setActiveCard] = useState<Offer | undefined>(undefined);
@@ -21,6 +25,8 @@ function MainScreen(): JSX.Element {
   const currentCity = useAppSelector(getActiveCity);
   const offers = useAppSelector(getOffers);
   const offersByCity = getOffersByCity(currentSorting, offers, currentCity.name);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isEmpty = offersByCity.length === 0;
 
   const handleMouseEnterItem = (id: string | undefined) => {
     const currentCard = offers.find((offer) => offer.id === id);
@@ -31,43 +37,52 @@ function MainScreen(): JSX.Element {
     setCurrentSorting(newSorting);
   };
 
+  if (isOffersDataLoading || authorizationStatus === AuthorizationStatus.Unknown) {
+    return <Loader />;
+  }
+
   return (
     <div className="page page--gray page--main">
       <Header />
 
-      <main className="page__main page__main--index">
+      <main className={cn(
+        'page__main',
+        'page__main--index',
+        {'page__main--index-empty': isEmpty}
+      )}
+      >
         <Helmet>
           <title>6 городов</title>
         </Helmet>
         <h1 className="visually-hidden">Cities</h1>
         <CitiesList currentCity={currentCity} />
-        {
-          isOffersDataLoading ? <Loader /> :
-            <div className="cities">
-              <div className="cities__places-container container">
-                <section className="cities__places places">
-                  <h2 className="visually-hidden">Places</h2>
-                  <b className="places__found">{offersByCity.length} places to stay in {currentCity.name}</b>
-                  <Sorting
-                    currentSorting={currentSorting}
-                    onChange={handleSortChange}
-                  />
-                  <CardsList
-                    offers={offersByCity}
-                    onCardMouseEnter={handleMouseEnterItem}
-                  />
-                </section>
-                <div className="cities__right-section">
-                  <Map
-                    offers={offersByCity}
-                    activeCard={activeCard}
-                    city={currentCity}
-                    isMainPage
-                  />
-                </div>
+        {!isEmpty ?
+          <div className="cities">
+            <div className="cities__places-container container">
+              <section className="cities__places places">
+                <h2 className="visually-hidden">Places</h2>
+                <b className="places__found">{offersByCity.length} places to stay in {currentCity.name}</b>
+                <Sorting
+                  currentSorting={currentSorting}
+                  onChange={handleSortChange}
+                />
+                <CardsList
+                  offers={offersByCity}
+                  onCardMouseEnter={handleMouseEnterItem}
+                />
+              </section>
+              <div className="cities__right-section">
+                <Map
+                  offers={offersByCity}
+                  activeCard={activeCard}
+                  city={currentCity}
+                  isMainPage
+                />
               </div>
             </div>
-        }
+          </div>
+          :
+          <MainPageEmpty cityName={currentCity.name} />}
       </main>
     </div>
   );
