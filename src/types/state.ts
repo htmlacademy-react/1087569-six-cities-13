@@ -2,9 +2,11 @@ import {store} from '../store';
 import {AuthorizationStatus, RequestStatus} from '../const';
 import {Offer, City, OfferDetail} from './offer';
 import {Comment} from './comment';
+import {UserData} from './user-data';
 
 export type UserProcess = {
   authorizationStatus: AuthorizationStatus;
+  currentUser: UserData | null;
 };
 
 export type OffersProcess = {

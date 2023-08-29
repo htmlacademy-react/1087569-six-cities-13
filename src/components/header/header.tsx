@@ -4,11 +4,12 @@ import {Link} from 'react-router-dom';
 import {logoutAction} from '../../store/api-actions';
 import {AuthorizationStatus, AppRoute} from '../../const';
 import {MouseEvent} from 'react';
-import {getAuthorizationStatus} from '../../store/user-process/user-process.selectors';
+import {getAuthorizationStatus, getUser} from '../../store/user-process/user-process.selectors';
 import {getFavorites} from '../../store/favorites-process/favorites-process.selectors';
 
 function Header(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const currentUser = useAppSelector(getUser);
   const favorites = useAppSelector(getFavorites);
   const dispatch = useAppDispatch();
   const handleLogoutClick = (evt: MouseEvent<HTMLElement>) => {
@@ -29,7 +30,7 @@ function Header(): JSX.Element {
                     <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
-                      <span className="header__user-name user__name">Dima6233@yandex.ru</span>
+                      <span className="header__user-name user__name">{currentUser?.email}</span>
                       <span className="header__favorite-count">{favorites.length}</span>
                     </Link>
                   </li>

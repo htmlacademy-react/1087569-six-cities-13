@@ -9,6 +9,7 @@ import {redirectToRoute} from './actions';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
 import {saveToken, dropToken} from '../services/token';
+import {setCurrentUser} from './user-process/user-process.slice';
 
 const fetchOffersAction = createAsyncThunk<Offer[], undefined, {
   dispatch: AppDispatch;
@@ -114,27 +115,31 @@ const deleteFavoriteAction = createAsyncThunk<OfferDetail, OfferDetail['id'], {
   }
 );
 
-const checkAuthAction = createAsyncThunk<void, undefined, {
+const checkAuthAction = createAsyncThunk<UserData, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   `${NameSpace.User}/checkAuth`,
   async (_arg, {extra: api}) => {
-    await api.get(APIRoute.Login);
+    const {data} = await api.get<UserData>(APIRoute.Login);
+
+    return data;
   }
 );
 
-const loginAction = createAsyncThunk<void, AuthData, {
+const loginAction = createAsyncThunk<UserData, AuthData, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   `${NameSpace.User}/login`,
   async ({email, password}, {dispatch, extra: api}) => {
-    const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
-    saveToken(token);
+    const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
+    saveToken(data.token);
     dispatch(redirectToRoute(AppRoute.Root));
+
+    return data;
   },
 );
 
@@ -144,9 +149,10 @@ const logoutAction = createAsyncThunk<void, undefined, {
   extra: AxiosInstance;
 }>(
   `${NameSpace.User}/logout`,
-  async (_arg, {extra: api}) => {
+  async (_arg, {dispatch, extra: api}) => {
     await api.delete(APIRoute.Logout);
     dropToken();
+    dispatch(setCurrentUser(null));
   },
 );
 
